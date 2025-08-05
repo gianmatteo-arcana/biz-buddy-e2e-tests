@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  playwright:
+    build: .
+    volumes:
+      - ./test-results:/app/test-results
+      - ./playwright-report:/app/playwright-report
+      - ./.auth:/app/.auth
+    environment:
+      - ENVIRONMENT=${ENVIRONMENT:-staging}
+      - BASE_URL=${BASE_URL:-https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com}
+      - CI=false
+    command: npm test
