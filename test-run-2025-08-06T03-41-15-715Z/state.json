@@ -1,0 +1,24 @@
+{
+  "url": "https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/",
+  "title": "SmallBizAlly - AI Compliance Assistant",
+  "hasAuth": true,
+  "elements": {
+    "dashboard": false,
+    "welcome": true,
+    "onboardingCard": false,
+    "loadingSpinner": true,
+    "chatButton": true
+  },
+  "visibleText": [
+    "SmallBizAlly",
+    "Welcome back, Gianmatteo!",
+    "Let's keep your business compliant and stress-free. I'm Ally, your AI compliance assistant, ready to help you stay on top of all your business requirements.",
+    "Hello! Welcome back. I'm Ally, your AI compliance assistant, ready to help you stay on top of all your business requirements and keep your business compliant and stress-free. How can I assist you today?",
+    "Welcome back, Gianmatteo!",
+    "Let's keep your business compliant and stress-free. I'm Ally, your AI compliance assistant, ready to help you stay on top of all your business requirements.",
+    "Loading tasks...",
+    "Priority Tasks",
+    "Business Snapshot",
+    "Where your paperwork stands today"
+  ]
+}
