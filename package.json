@@ -22,7 +22,10 @@
     "auth:push": "node auth-refresh-and-deploy.js --push-only",
     "auth:refresh-deploy": "node auth-refresh-and-deploy.js",
     "railway:deploy": "railway up",
-    "deploy": "npm run auth:push && npm run railway:deploy"
+    "deploy": "npm run auth:push && npm run railway:deploy",
+    "test:fresh-signup": "playwright test tests/e2e/fresh-signup-flow.spec.ts --config playwright.config.no-auth.ts",
+    "test:oauth-flow": "playwright test tests/e2e/google-oauth-flow.spec.ts --config playwright.config.no-auth.ts",
+    "test:manual-signup": "playwright test tests/e2e/manual-signup-test.spec.ts --config playwright.config.no-auth.ts --headed"
   },
   "keywords": ["e2e", "testing", "playwright", "bizbuddy"],
   "author": "",
