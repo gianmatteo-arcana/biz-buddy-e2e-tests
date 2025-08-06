@@ -43,3 +43,16 @@ auth-state.json
 
 # Cleanup queue
 test-results/cleanup-queue.json
+
+# Test run artifacts (NEVER commit these!)
+test-run-*/
+test-onboarding-*/
+autonomous-test-results/
+*.png
+*.jpg
+*.jpeg
+browser-console.log
+console.log
+network.log
+state.json
+summary.json
