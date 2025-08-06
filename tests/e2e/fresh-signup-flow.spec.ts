@@ -35,9 +35,15 @@ test.describe('Fresh User Signup Flow', () => {
     const emailInput = page.locator('input[type="email"]');
     await emailInput.waitFor({ state: 'visible', timeout: 10000 });
     
-    // NOTE: You'll need to provide test credentials
-    const testEmail = process.env.TEST_GOOGLE_EMAIL || 'your-test-email@gmail.com';
-    const testPassword = process.env.TEST_GOOGLE_PASSWORD || 'your-test-password';
+    // Get test credentials from environment
+    const testEmail = process.env.TEST_GOOGLE_EMAIL || 'gianmatteo.allyn.test@gmail.com';
+    const testPassword = process.env.TEST_GOOGLE_PASSWORD || '';
+    
+    if (!testPassword) {
+      console.error('❌ TEST_GOOGLE_PASSWORD not set - skipping test');
+      test.skip();
+      return;
+    }
     
     await emailInput.fill(testEmail);
     await page.keyboard.press('Enter');

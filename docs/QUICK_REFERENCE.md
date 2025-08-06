@@ -2,6 +2,11 @@
 
 ## 🎯 Common Commands
 
+### First Time Setup
+```bash
+npm run setup               # Configure test credentials
+```
+
 ### Daily Development
 ```bash
 npm run auth:check          # Check if auth is valid

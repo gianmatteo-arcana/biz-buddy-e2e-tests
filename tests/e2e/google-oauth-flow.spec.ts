@@ -74,15 +74,16 @@ test.describe('Google OAuth Flow Tests', () => {
     // Now we're on Google's page
     console.log('📍 On Google OAuth page');
     
-    // Get credentials from environment or use defaults
-    const email = process.env.TEST_GOOGLE_EMAIL || '';
+    // Get credentials from environment
+    const email = process.env.TEST_GOOGLE_EMAIL || 'gianmatteo.allyn.test@gmail.com';
     const password = process.env.TEST_GOOGLE_PASSWORD || '';
     
-    if (!email || !password) {
-      console.error('❌ TEST_GOOGLE_EMAIL and TEST_GOOGLE_PASSWORD must be set');
-      console.log('Set them with:');
-      console.log('export TEST_GOOGLE_EMAIL="your-test@gmail.com"');
-      console.log('export TEST_GOOGLE_PASSWORD="your-password"');
+    if (!password) {
+      console.error('❌ TEST_GOOGLE_PASSWORD must be set in .env file');
+      console.log('\nSetup instructions:');
+      console.log('1. Copy .env.example to .env');
+      console.log('2. Add the test account password');
+      console.log('3. Run the test again\n');
       test.skip();
       return;
     }

@@ -8,11 +8,11 @@ End-to-end tests for BizBuddy with Google OAuth authentication support.
 # Install dependencies
 npm install
 
+# First time setup (configure test credentials)
+npm run setup
+
 # Capture auth state (opens browser for Google login)
 npm run auth:refresh
-
-# Check auth validity
-npm run auth:check
 
 # Run tests
 npm test
