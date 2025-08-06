@@ -1,0 +1,17 @@
+{
+  "url": "https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/",
+  "title": "SmallBizAlly - AI Compliance Assistant",
+  "hasAuth": true,
+  "elements": {
+    "dashboard": false,
+    "welcome": true,
+    "onboardingCard": false,
+    "loadingSpinner": false,
+    "chatButton": false
+  },
+  "visibleText": [
+    "Welcome to SmallBizAlly",
+    "Your always‑there sidekick—sorting the paperwork, explaining what matters, so you can stay focused on the business.",
+    "💡 Tip: sign in with your work email so Ally can find your business faster."
+  ]
+}

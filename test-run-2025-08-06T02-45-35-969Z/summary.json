@@ -1,0 +1,20 @@
+{
+  "timestamp": "2025-08-06T02-45-35-969Z",
+  "url": "https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/",
+  "authenticated": true,
+  "onboardingVisible": true,
+  "errors": 0,
+  "networkRequests": 121,
+  "screenshots": [
+    "01-initial-load.png",
+    "02-after-5s.png",
+    "03-after-reload.png",
+    "04-final-state.png"
+  ],
+  "logs": [
+    "console.log",
+    "browser-console.log",
+    "network.log",
+    "state.json"
+  ]
+}

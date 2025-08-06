@@ -32,6 +32,7 @@ yarn-error.log*
 # Auth state (contains sensitive data)
 auth-state.json
 *.enc
+.test-credentials
 
 # Temporary files
 *.tmp

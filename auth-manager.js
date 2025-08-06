@@ -1,6 +1,8 @@
 const { chromium } = require('@playwright/test');
 const fs = require('fs');
 const path = require('path');
+const { getTestCredentials } = require('./scripts/get-credentials');
+const { waitForAppReady } = require('./helpers/waitForApp');
 
 class AuthManager {
   constructor() {
@@ -99,18 +101,25 @@ class AuthManager {
     // Poll for authentication
     let authenticated = false;
     let attempts = 0;
-    const maxAttempts = 120; // 2 minutes
+    const maxAttempts = 300; // 5 minutes - more time for password entry
 
     while (!authenticated && attempts < maxAttempts) {
       await page.waitForTimeout(1000); // Wait 1 second
 
-      // Check for various auth indicators
+      // Check for various auth indicators including the test user
       const indicators = await Promise.all([
         page.locator('text=Welcome back').isVisible().catch(() => false),
         page.locator('text=Chat with Ally').isVisible().catch(() => false),
         page.locator('text=Dashboard').isVisible().catch(() => false),
+        page.locator('text=gianmatteo.allyn.test@gmail.com').isVisible().catch(() => false),
         page.locator('text=Gianmatteo').isVisible().catch(() => false),
-        page.url().includes('dashboard')
+        page.locator('[data-testid="dashboard-container"]').isVisible().catch(() => false),
+        page.url().includes('dashboard'),
+        // Also check for localStorage auth token - using the correct Supabase instance key
+        page.evaluate(() => {
+          const auth = localStorage.getItem('sb-raenkewzlvrdqufwxjpl-auth-token');
+          return auth !== null && auth !== undefined;
+        }).catch(() => false)
       ]);
 
       authenticated = indicators.some(v => v === true);
@@ -126,8 +135,40 @@ class AuthManager {
     if (authenticated) {
       console.log('✅ Authentication detected! Saving state...');
       
-      // Wait a bit for all cookies to settle
-      await page.waitForTimeout(3000);
+      // Wait for OAuth redirect and localStorage to be populated
+      console.log('Waiting for BizBuddy session to be established...');
+      
+      // Wait for the app to be on the correct domain
+      if (!page.url().includes('localhost:5173') && !page.url().includes('biz-buddy')) {
+        try {
+          await page.waitForURL('**/localhost:5173/**', { timeout: 30000 });
+        } catch (e) {
+          console.log('Warning: Could not navigate to BizBuddy domain');
+        }
+      }
+      
+      // Wait for localStorage to contain auth token
+      let hasAuthToken = false;
+      for (let i = 0; i < 30; i++) {
+        hasAuthToken = await page.evaluate(() => {
+          const auth = localStorage.getItem('sb-raenkewzlvrdqufwxjpl-auth-token');
+          return auth !== null && auth !== undefined && auth !== '';
+        }).catch(() => false);
+        
+        if (hasAuthToken) {
+          console.log('✅ BizBuddy auth token detected in localStorage');
+          break;
+        }
+        
+        await page.waitForTimeout(1000);
+      }
+      
+      if (!hasAuthToken) {
+        console.log('⚠️  Warning: No BizBuddy auth token found in localStorage');
+      }
+      
+      // Wait a bit more for all cookies to settle
+      await page.waitForTimeout(2000);
       
       // Save the state
       await context.storageState({ path: this.authFile });
