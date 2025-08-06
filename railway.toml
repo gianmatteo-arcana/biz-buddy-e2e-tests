@@ -1,0 +1,10 @@
+[build]
+builder = "nixpacks"
+buildCommand = "npm install && npx playwright install chromium"
+
+[deploy]
+startCommand = "npm run ci:test"
+restartPolicyType = "never"
+
+[[services]]
+name = "e2e-tests"

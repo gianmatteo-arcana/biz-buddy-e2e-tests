@@ -69,7 +69,10 @@ export default defineConfig({
       testMatch: /auth\.setup\.ts/,
       use: {
         ...devices['Desktop Chrome'],
+        // Run auth setup in headed mode for manual interaction
+        headless: false,
       },
+      timeout: 5 * 60 * 1000, // 5 minutes for manual auth
     },
 
     /* Main tests - depend on setup */

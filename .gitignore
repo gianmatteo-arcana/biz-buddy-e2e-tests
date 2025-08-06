@@ -34,3 +34,6 @@ auth-state.json
 # Temporary files
 *.tmp
 *.temp
+
+# Browser data
+.browser-data/
