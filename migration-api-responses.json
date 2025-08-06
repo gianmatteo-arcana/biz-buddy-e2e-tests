@@ -1,0 +1,65 @@
+{
+  "migrationResponses": [],
+  "uiState": {
+    "elements": {
+      "buttons": [
+        {
+          "text": "Show Console",
+          "visible": false,
+          "testId": null
+        },
+        {
+          "text": "Timeline Mode",
+          "visible": true,
+          "testId": null
+        },
+        {
+          "text": "●OpenAI",
+          "visible": true,
+          "testId": null
+        },
+        {
+          "text": "Gianmatteo Allyn",
+          "visible": true,
+          "testId": null
+        },
+        {
+          "text": "Review my compliance status",
+          "visible": true,
+          "testId": null
+        },
+        {
+          "text": "Update Statement of Information",
+          "visible": true,
+          "testId": null
+        },
+        {
+          "text": "Review letter",
+          "visible": true,
+          "testId": null
+        },
+        {
+          "text": "Ask a question",
+          "visible": true,
+          "testId": null
+        },
+        {
+          "text": "Chat with Ally",
+          "visible": true,
+          "testId": null
+        },
+        {
+          "text": "Close Profile",
+          "visible": true,
+          "testId": null
+        }
+      ],
+      "badges": [],
+      "migrationIndicators": [],
+      "migrationTextFound": false,
+      "pendingTextFound": null
+    },
+    "url": "https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/"
+  },
+  "capturedMigrationState": null
+}
