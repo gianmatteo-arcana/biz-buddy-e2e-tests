@@ -25,7 +25,10 @@
     "deploy": "npm run auth:push && npm run railway:deploy",
     "test:fresh-signup": "playwright test tests/e2e/fresh-signup-flow.spec.ts --config playwright.config.no-auth.ts",
     "test:oauth-flow": "playwright test tests/e2e/google-oauth-flow.spec.ts --config playwright.config.no-auth.ts",
-    "test:manual-signup": "playwright test tests/e2e/manual-signup-test.spec.ts --config playwright.config.no-auth.ts --headed"
+    "test:manual-signup": "playwright test tests/e2e/manual-signup-test.spec.ts --config playwright.config.no-auth.ts --headed",
+    "test:first-time": "playwright test tests/e2e/first-time-user.spec.ts --config playwright.config.no-auth.ts",
+    "cleanup:dry-run": "CLEANUP_DRY_RUN=true ts-node scripts/cleanup-test-users.ts",
+    "cleanup:test-users": "ENVIRONMENT=test ts-node scripts/cleanup-test-users.ts"
   },
   "keywords": ["e2e", "testing", "playwright", "bizbuddy"],
   "author": "",

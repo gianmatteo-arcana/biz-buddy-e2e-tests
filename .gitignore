@@ -10,6 +10,8 @@ playwright-report/
 .env
 .env.local
 .env.*.local
+.env.test
+.env.staging
 
 # OS files
 .DS_Store
@@ -37,3 +39,6 @@ auth-state.json
 
 # Browser data
 .browser-data/
+
+# Cleanup queue
+test-results/cleanup-queue.json
