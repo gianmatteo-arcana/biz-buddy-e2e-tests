@@ -1,140 +1,109 @@
 # BizBuddy E2E Tests
 
-End-to-end tests for BizBuddy application using Playwright.
+End-to-end tests for BizBuddy with Google OAuth authentication support.
 
 ## 🚀 Quick Start
 
-### Prerequisites
-- Node.js 18+
-- npm or yarn
-- Access to BizBuddy staging/production environments
-
-### Installation
 ```bash
+# Install dependencies
 npm install
-npx playwright install
+
+# Capture auth state (opens browser for Google login)
+npm run auth:refresh
+
+# Check auth validity
+npm run auth:check
+
+# Run tests
+npx playwright test tests/e2e/full-auth-flow.spec.ts --config playwright.config.simple.ts
 ```
 
-### First Time Setup (Google OAuth)
-```bash
-# Save authentication state (manual process - one time only)
-npm run test:auth
+## ✨ Features
 
-# This will:
-# 1. Open a browser
-# 2. Navigate to BizBuddy
-# 3. Wait for you to sign in with Google
-# 4. Save the auth state for future test runs
+- **Auto-detecting auth capture** - No manual "Press Enter" needed
+- **Token management** - Track expiration and refresh easily
+- **Comprehensive tests** - Full authenticated user journey tests
+- **CI/CD ready** - Scripts for Railway deployment (future work)
+
+## 📖 How It Works
+
+1. **Auth Capture**: The `AuthManager` opens a browser, waits for you to sign in with Google, and automatically detects when authentication is complete
+2. **State Persistence**: Auth state (cookies + localStorage) is saved to `.auth/user-state.json`
+3. **Test Execution**: Playwright loads the saved auth state before each test, allowing tests to run as an authenticated user
+
+## 🔑 Authentication
+
+### Capture New Auth
+```bash
+npm run auth:refresh
+```
+This will:
+- Open a browser window
+- Navigate to BizBuddy
+- Wait for you to sign in
+- Auto-detect successful authentication
+- Save the complete auth state
+
+### Check Auth Status
+```bash
+npm run auth:check
+```
+Output:
+```json
+{
+  "valid": true,
+  "expiresAt": "8/5/2025, 6:10:34 PM",
+  "minutesLeft": 45
+}
 ```
 
-### Running Tests
+## 🧪 Running Tests
+
+### Recommended Test
 ```bash
-# Run all tests
+npx playwright test tests/e2e/full-auth-flow.spec.ts --config playwright.config.simple.ts
+```
+
+### All Tests
+```bash
 npm test
+```
 
-# Run with UI mode (recommended for debugging)
-npm run test:ui
-
-# Run specific test suite
-npm run test:signup
-npm run test:visual
-
-# Run against different environments
-npm run test:staging
-npm run test:production
+### With Auth Check
+```bash
+npm run test:safe
 ```
 
 ## 📁 Project Structure
 
 ```
-tests/
-├── auth/
-│   └── auth.setup.ts      # Google OAuth state saver
-├── e2e/
-│   ├── signup-flow.spec.ts # User signup/onboarding tests
-│   └── dashboard.spec.ts   # Dashboard functionality tests
-├── visual/
-│   └── visual.spec.ts      # Visual regression tests
-└── utils/
-    ├── helpers.ts          # Common test utilities
-    └── selectors.ts        # UI element selectors
+├── .auth/                  # Auth state (gitignored)
+├── scripts/               # CI/CD helper scripts
+├── tests/
+│   ├── auth/             # Auth setup tests
+│   └── e2e/              # E2E test specs
+├── auth-manager.js        # Core auth management
+├── playwright.config.ts   # Main config
+└── test-with-auth.js     # Safe test runner
 ```
 
-## 🔐 Authentication
+## ⏱️ Token Expiration
 
-We use Playwright's auth state persistence to handle Google OAuth:
+- **Supabase tokens**: Valid for ~1 hour
+- **Google OAuth**: ~1 hour
+- **Google session cookies**: Can last days/months
 
-1. **Initial Setup**: Run `npm run test:auth` and manually sign in
-2. **State Storage**: Auth cookies/tokens saved to `.auth/user-state.json`
-3. **Test Execution**: All tests reuse the saved auth state
-4. **Refresh**: Re-run auth setup when tokens expire (typically monthly)
+When tokens expire, simply run `npm run auth:refresh` again.
 
-## 🌍 Environments
+## 🚧 Future Work
 
-Configure test environment via `ENVIRONMENT` variable:
+- Railway deployment automation
+- Scheduled test runs
+- Multi-environment support
+- Visual regression tests
 
-- `staging` (default): Lovable preview URL
-- `production`: Production application
-- `local`: Local development (http://localhost:5173)
+## 📝 Notes
 
-## 🚢 Deployment
-
-This test suite is deployed to Railway as a standalone service.
-
-### Railway Configuration
-- Service runs as cron job (daily at 2 AM)
-- Test results stored in Railway volumes
-- Can be triggered manually via Railway dashboard
-
-### CI/CD Integration
-Tests can be triggered from GitHub Actions in the main repos.
-
-## 📊 Test Reports
-
-- **HTML Report**: `npm run test:report`
-- **JSON Results**: `test-results/results.json`
-- **Screenshots**: `test-results/` (on failure)
-- **Videos**: `test-results/` (on failure)
-
-## 🛠️ Troubleshooting
-
-### Auth State Expired
-```bash
-rm -rf .auth/
-npm run test:auth
-```
-
-### Tests Failing on CI
-- Check if auth state needs refresh
-- Verify environment URLs are accessible
-- Review screenshot/video artifacts
-
-### Flaky Tests
-- Increase timeouts in playwright.config.ts
-- Add explicit waits for dynamic content
-- Use more specific selectors
-
-## 📝 Writing Tests
-
-### Best Practices
-1. Use data-testid attributes for reliable selectors
-2. Avoid hard-coded waits - use Playwright's auto-waiting
-3. Write independent tests that don't rely on order
-4. Clean up test data after each test
-5. Use descriptive test names
-
-### Example Test
-```typescript
-test('user can complete onboarding', async ({ page }) => {
-  await page.goto('/');
-  
-  // Assert onboarding card is visible
-  await expect(page.getByText('Welcome to BizBuddy!')).toBeVisible();
-  
-  // Fill business details
-  await page.fill('[data-testid="business-name"]', 'Test Company');
-  await page.click('[data-testid="continue-button"]');
-  
-  // Verify completion
-  await expect(page).toHaveURL('/dashboard');
-});
+- Some tests may show timing issues (loading spinner) - use the `full-auth-flow.spec.ts` test which is more resilient
+- Auth state contains sensitive data and is gitignored
+- The debug test (`test-debug.spec.ts`) provides detailed console logging if troubleshooting is needed
