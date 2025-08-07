@@ -115,7 +115,7 @@ async function testDemoMode() {
     console.log('  - demo-3-chat.png');
     console.log('  - demo-4-message.png');
     
-  } catch (error) {
+  } catch (_error) {
     console.error('💥 Test failed:', error.message);
     await page.screenshot({ path: 'demo-error.png', fullPage: true });
   } finally {

@@ -90,7 +90,7 @@ async function clearBusinessInfo() {
     }
     
     await browser.close();
-  } catch (error) {
+  } catch (_error) {
     console.error('❌ Error:', error);
   }
 }

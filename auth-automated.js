@@ -11,7 +11,7 @@ async function automatedAuthCapture() {
   try {
     credentials = getTestCredentials();
     console.log(`✅ Using credentials for: ${credentials.email}`);
-  } catch (error) {
+  } catch (_error) {
     console.error('❌ No credentials found. Run: npm run setup:credentials');
     process.exit(1);
   }
@@ -51,7 +51,7 @@ async function automatedAuthCapture() {
     console.log('Waiting for password field...');
     try {
       await page.waitForSelector('input[type="password"]', { visible: true, timeout: 30000 });
-    } catch (e) {
+    } catch (_e) {
       // Check for error messages
       const errorText = await page.textContent('body');
       if (errorText.includes("Couldn't find your Google Account")) {
@@ -80,7 +80,7 @@ async function automatedAuthCapture() {
         console.log('Handling consent screen...');
         await consentButton.click();
       }
-    } catch (e) {
+    } catch (_e) {
       // No consent screen, continue
     }
     
@@ -130,7 +130,7 @@ async function automatedAuthCapture() {
       const expiresAt = new Date(tokenData.expires_at * 1000);
       const minutesLeft = Math.floor((expiresAt - new Date()) / 1000 / 60);
       console.log(`\n⏰ Token expires in ${minutesLeft} minutes`);
-    } catch (e) {
+    } catch (_e) {
       // Token might not be JSON
     }
     
@@ -138,7 +138,7 @@ async function automatedAuthCapture() {
     console.log('\n✨ Authentication capture complete!');
     await page.waitForTimeout(3000);
     
-  } catch (error) {
+  } catch (_error) {
     console.error('\n❌ Authentication failed:', error.message);
     
     // Take screenshot for debugging

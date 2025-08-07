@@ -69,7 +69,7 @@ async function prepareAuthForCI() {
     console.log('\n✅ Auth state prepared successfully');
     return true;
     
-  } catch (error) {
+  } catch (_error) {
     console.error('❌ Failed to prepare auth state:', error.message);
     return false;
   }

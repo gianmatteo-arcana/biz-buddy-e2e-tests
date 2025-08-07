@@ -23,7 +23,7 @@ const { chromium } = require('@playwright/test');
     
     // Keep browser open
     await new Promise(() => {});
-  } catch (error) {
+  } catch (_error) {
     console.error('❌ Error launching browser:', error);
   }
 })();

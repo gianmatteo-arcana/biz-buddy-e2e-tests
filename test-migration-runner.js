@@ -87,7 +87,7 @@ async function testMigrationRunner() {
       } else {
         console.log('\n❌ No migration button found');
       }
-    } catch (e) {
+    } catch (_e) {
       console.log('\n⚠️  Could not interact with migration button:', e.message);
     }
     
@@ -130,7 +130,7 @@ async function testMigrationRunner() {
     await page.screenshot({ path: 'migration-runner-final.png', fullPage: true });
     console.log('\n📸 Final screenshot saved: migration-runner-final.png');
     
-  } catch (error) {
+  } catch (_error) {
     console.error('\n❌ Test failed:', error);
     await page.screenshot({ path: 'migration-error.png' });
   } finally {

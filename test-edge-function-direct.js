@@ -51,12 +51,12 @@ const puppeteer = require('puppeteer');
         parsedBody: (() => {
           try {
             return JSON.parse(data);
-          } catch (e) {
+          } catch (_e) {
             return null;
           }
         })()
       };
-    } catch (error) {
+    } catch (_error) {
       return {
         error: error.message,
         stack: error.stack

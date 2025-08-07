@@ -63,7 +63,7 @@ class AuthManager {
         timeLeft
       };
 
-    } catch (error) {
+    } catch (_error) {
       return { valid: false, reason: `Error parsing auth: ${error.message}` };
     }
   }
@@ -142,7 +142,7 @@ class AuthManager {
       if (!page.url().includes('localhost:5173') && !page.url().includes('biz-buddy')) {
         try {
           await page.waitForURL('**/localhost:5173/**', { timeout: 30000 });
-        } catch (e) {
+        } catch (_e) {
           console.log('Warning: Could not navigate to BizBuddy domain');
         }
       }

@@ -49,7 +49,7 @@ const puppeteer = require('puppeteer');
           error: error?.message || null,
           hasData: data?.length > 0
         };
-      } catch (e) {
+      } catch (_e) {
         results[table] = {
           exists: false,
           error: e.message,

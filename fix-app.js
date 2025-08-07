@@ -90,7 +90,7 @@ async function fixApp() {
     await page.screenshot({ path: 'app-state.png', fullPage: true });
     console.log('📸 Screenshot saved as app-state.png');
     
-  } catch (error) {
+  } catch (_error) {
     console.error('💥 Test failed:', error.message);
   }
   

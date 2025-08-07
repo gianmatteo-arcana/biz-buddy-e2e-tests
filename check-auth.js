@@ -58,7 +58,7 @@ async function checkAuth() {
     await page.screenshot({ path: 'auth-check.png', fullPage: true });
     console.log('📸 Screenshot saved as auth-check.png');
     
-  } catch (error) {
+  } catch (_error) {
     console.error('💥 Failed:', error.message);
   } finally {
     await browser.close();

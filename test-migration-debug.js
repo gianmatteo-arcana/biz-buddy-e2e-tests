@@ -102,7 +102,7 @@ async function debugMigrations() {
               error: error?.message,
               count: count || 0
             };
-          } catch (e) {
+          } catch (_e) {
             tableStatus[table] = {
               exists: false,
               error: e.message
@@ -140,7 +140,7 @@ async function debugMigrations() {
     await page.screenshot({ path: 'migration-debug.png', fullPage: true });
     console.log('\n📸 Screenshot saved: migration-debug.png');
     
-  } catch (error) {
+  } catch (_error) {
     console.error('\n❌ Debug failed:', error);
     await page.screenshot({ path: 'debug-error.png' });
   } finally {

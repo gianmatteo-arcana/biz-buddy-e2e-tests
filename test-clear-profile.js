@@ -92,7 +92,7 @@ async function clearProfileForOnboarding() {
       console.log('\n📸 Screenshot saved: profile-cleared-state.png');
     }
     
-  } catch (error) {
+  } catch (_error) {
     console.error('\n❌ Failed:', error);
     await page.screenshot({ path: 'clear-profile-error.png' });
   } finally {

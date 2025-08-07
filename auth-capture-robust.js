@@ -50,7 +50,7 @@ const path = require('path');
         const keys = Object.keys(localStorage);
         return keys.some(key => key.includes('auth-token'));
       });
-    } catch (e) {
+    } catch (_e) {
       // Page might be navigating
     }
     

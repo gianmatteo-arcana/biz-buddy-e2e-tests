@@ -59,7 +59,7 @@ async function testLocal() {
     
     console.log('🎯 App Components:', hasApp);
     
-  } catch (error) {
+  } catch (_error) {
     console.error('💥 Failed:', error.message);
     await page.screenshot({ path: 'error-state.png' });
   } finally {

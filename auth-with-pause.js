@@ -52,7 +52,7 @@ const fs = require('fs');
     await page.screenshot({ path: 'test-results/auth-success.png' });
     console.log('\n✅ Authentication saved successfully!');
     
-  } catch (error) {
+  } catch (_error) {
     console.log('\n❌ Timeout waiting for authentication');
     console.log('Please try again');
   }

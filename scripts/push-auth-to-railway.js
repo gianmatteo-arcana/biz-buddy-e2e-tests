@@ -17,7 +17,7 @@ async function pushAuthToRailway() {
     try {
       execSync('railway --version', { stdio: 'pipe' });
       console.log('✅ Railway CLI detected');
-    } catch (e) {
+    } catch (_e) {
       console.error('❌ Railway CLI not found. Install it with:');
       console.error('   npm install -g @railway/cli');
       console.error('   Then run: railway login');
@@ -39,7 +39,7 @@ async function pushAuthToRailway() {
     // 4. Check if we're in a Railway project
     try {
       execSync('railway status', { stdio: 'pipe' });
-    } catch (e) {
+    } catch (_e) {
       console.error('❌ Not in a Railway project. Run: railway link');
       return false;
     }
@@ -61,7 +61,7 @@ async function pushAuthToRailway() {
     
     return true;
     
-  } catch (error) {
+  } catch (_error) {
     console.error('❌ Error:', error.message);
     return false;
   }

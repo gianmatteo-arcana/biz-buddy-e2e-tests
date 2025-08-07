@@ -127,7 +127,7 @@ async function testVercelApp() {
       errors.forEach(e => console.log(`  - ${e}`));
     }
     
-  } catch (error) {
+  } catch (_error) {
     console.error('💥 Test Failed:', error.message);
     await page.screenshot({ 
       path: path.join(testDir, 'error-state.png'),

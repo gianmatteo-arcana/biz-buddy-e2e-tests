@@ -30,7 +30,7 @@ const fs = require('fs');
       loaded = true;
       console.log(`✅ Loaded from ${url}`);
       break;
-    } catch (e) {
+    } catch (_e) {
       console.log(`❌ Failed to load ${url}`);
     }
   }

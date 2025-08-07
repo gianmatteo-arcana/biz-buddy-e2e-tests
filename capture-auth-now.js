@@ -58,7 +58,7 @@ const fs = require('fs');
     await browser.close();
     process.exit(0);
     
-  } catch (error) {
+  } catch (_error) {
     console.error('Error:', error.message);
     process.exit(1);
   }

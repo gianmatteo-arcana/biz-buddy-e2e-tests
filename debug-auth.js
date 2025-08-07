@@ -28,7 +28,7 @@ const fs = require('fs');
           const isExpired = expiresAt < now;
           console.log(`  Token expires at: ${expiresAt.toLocaleString()}`);
           console.log(`  Token expired: ${isExpired}`);
-        } catch (e) {
+        } catch (_e) {
           console.log('  Could not parse token data');
         }
       }

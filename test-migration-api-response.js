@@ -30,7 +30,7 @@ async function testMigrationAPIResponse() {
       
       try {
         responseData = await response.json();
-      } catch (e) {
+      } catch (_e) {
         responseData = await response.text();
       }
       
@@ -62,7 +62,7 @@ async function testMigrationAPIResponse() {
           if (stateMatch) {
             capturedMigrationState = JSON.parse(stateMatch[1]);
           }
-        } catch (e) {}
+        } catch (_e) {}
       }
       
       // Capture response data
@@ -73,7 +73,7 @@ async function testMigrationAPIResponse() {
             const response = JSON.parse(responseMatch[1]);
             console.log('\n✅ Captured Migration Response:', response);
           }
-        } catch (e) {}
+        } catch (_e) {}
       }
     }
   });
@@ -171,7 +171,7 @@ async function testMigrationAPIResponse() {
         
         await page.screenshot({ path: 'migration-dev-console.png', fullPage: true });
       }
-    } catch (e) {
+    } catch (_e) {
       console.log('\n⚠️  Could not open dev console');
     }
     
@@ -188,7 +188,7 @@ async function testMigrationAPIResponse() {
       JSON.stringify({ migrationResponses, uiState, capturedMigrationState }, null, 2));
     console.log('\n💾 Detailed data saved to: migration-api-responses.json');
     
-  } catch (error) {
+  } catch (_error) {
     console.error('\n❌ Test failed:', error);
     await page.screenshot({ path: 'migration-api-error.png' });
   } finally {

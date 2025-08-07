@@ -94,7 +94,7 @@ async function testHappyPath(page) {
     }, screenshot);
     
     return { success: true };
-  } catch (error) {
+  } catch (_error) {
     const screenshot = await page.screenshot();
     await saveTestResult('happy-path', 'failed', {
       error: error.message,
@@ -146,7 +146,7 @@ async function testMidTaskAbandonment(page) {
     }, screenshot);
     
     return { success: true, dataPreserved: value === 'Partial Business' };
-  } catch (error) {
+  } catch (_error) {
     const screenshot = await page.screenshot();
     await saveTestResult('mid-task-abandonment', 'failed', {
       error: error.message
@@ -208,7 +208,7 @@ async function testTaskPauseResume(page) {
     }, screenshot);
     
     return { success: true };
-  } catch (error) {
+  } catch (_error) {
     const screenshot = await page.screenshot();
     await saveTestResult('task-pause-resume', 'failed', {
       error: error.message
@@ -269,7 +269,7 @@ async function testRapidTaskSwitching(page) {
     }, screenshot);
     
     return { success: true, uiStable: isStable };
-  } catch (error) {
+  } catch (_error) {
     const screenshot = await page.screenshot();
     await saveTestResult('rapid-task-switching', 'failed', {
       error: error.message
@@ -324,7 +324,7 @@ async function testChatContextPersistence(page) {
     }, screenshot);
     
     return { success: true, contextPreserved: chatHistory > 0 };
-  } catch (error) {
+  } catch (_error) {
     const screenshot = await page.screenshot();
     await saveTestResult('chat-context-persistence', 'failed', {
       error: error.message
@@ -378,7 +378,7 @@ async function testErrorRecovery(page) {
     }, screenshot);
     
     return { success: true, recovered };
-  } catch (error) {
+  } catch (_error) {
     const screenshot = await page.screenshot();
     await saveTestResult('error-recovery', 'failed', {
       error: error.message
@@ -432,7 +432,7 @@ async function testMultiTabBehavior(context) {
     }, screenshot1);
     
     return { success: true, stable: isStable };
-  } catch (error) {
+  } catch (_error) {
     const screenshot = await page1.screenshot();
     await saveTestResult('multi-tab-behavior', 'failed', {
       error: error.message
@@ -483,7 +483,7 @@ async function runAllTests() {
       const result = await test.fn(page);
       results.push({ test: test.name, ...result });
       console.log(`✅ ${test.name}: ${result.success ? 'PASSED' : 'FAILED'}`);
-    } catch (error) {
+    } catch (_error) {
       console.error(`❌ ${test.name}: ERROR - ${error.message}`);
       results.push({ test: test.name, success: false, error: error.message });
     }
@@ -497,7 +497,7 @@ async function runAllTests() {
     const multiTabResult = await testMultiTabBehavior(context);
     results.push({ test: 'Multi-tab Behavior', ...multiTabResult });
     console.log(`✅ Multi-tab Behavior: ${multiTabResult.success ? 'PASSED' : 'FAILED'}`);
-  } catch (error) {
+  } catch (_error) {
     console.error(`❌ Multi-tab Behavior: ERROR - ${error.message}`);
     results.push({ test: 'Multi-tab Behavior', success: false, error: error.message });
   }

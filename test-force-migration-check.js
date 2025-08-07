@@ -111,7 +111,7 @@ async function forceMigrationCheck() {
     await page.screenshot({ path: 'force-migration-check.png', fullPage: true });
     console.log('\n📸 Screenshot saved: force-migration-check.png');
     
-  } catch (error) {
+  } catch (_error) {
     console.error('\n❌ Test failed:', error);
     await page.screenshot({ path: 'force-check-error.png' });
   } finally {

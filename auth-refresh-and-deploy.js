@@ -20,7 +20,7 @@ class AuthRefreshDeploy {
     try {
       execSync('railway --version', { stdio: 'pipe' });
       return true;
-    } catch (e) {
+    } catch (_e) {
       console.error('\n❌ Railway CLI not installed');
       console.error('Install it with: npm install -g @railway/cli');
       console.error('Then login with: railway login\n');
@@ -32,7 +32,7 @@ class AuthRefreshDeploy {
     try {
       execSync('railway status', { stdio: 'pipe' });
       return true;
-    } catch (e) {
+    } catch (_e) {
       console.error('\n❌ Not linked to a Railway project');
       console.error('Run: railway link\n');
       return false;
@@ -90,7 +90,7 @@ class AuthRefreshDeploy {
       });
       console.log('✅ Auth state pushed to Railway');
       return true;
-    } catch (e) {
+    } catch (_e) {
       console.error('❌ Failed to update Railway variable:', e.message);
       return false;
     }
@@ -170,7 +170,7 @@ async function simpleAuthPush() {
     console.log('\n✅ Done! Auth state updated in Railway');
     console.log('🚀 To deploy: railway up');
     
-  } catch (e) {
+  } catch (_e) {
     console.error('❌ Error:', e.message);
     process.exit(1);
   }

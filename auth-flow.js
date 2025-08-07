@@ -18,7 +18,7 @@ async function runAuthFlow() {
     
     try {
       await execAsync('npm run setup:credentials', { stdio: 'inherit' });
-    } catch (error) {
+    } catch (_error) {
       console.error('Failed to setup credentials');
       process.exit(1);
     }
@@ -44,7 +44,7 @@ async function runAuthFlow() {
         if (tokenItem) {
           try {
             authToken = JSON.parse(tokenItem.value);
-          } catch (e) {
+          } catch (_e) {
             // Token might not be JSON
           }
         }
@@ -64,7 +64,7 @@ async function runAuthFlow() {
           console.log(`⚠️  Auth expires in ${minutesLeft} minutes - refreshing...`);
         }
       }
-    } catch (error) {
+    } catch (_error) {
       console.log('⚠️  Could not validate existing auth');
     }
   } else {
@@ -82,7 +82,7 @@ async function runAuthFlow() {
     console.log('\n✅ Authentication complete!');
     console.log('🎯 Ready to run tests!\n');
     console.log('Run: npm test');
-  } catch (error) {
+  } catch (_error) {
     console.error('\n❌ Authentication failed');
     console.error(error.message);
     

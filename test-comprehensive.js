@@ -56,7 +56,7 @@ async function runComprehensiveTests() {
       results.tests.push({ name: 'App Loads', status: 'failed', error: 'No content' });
       results.summary.failed++;
     }
-  } catch (error) {
+  } catch (_error) {
     console.log('❌ App failed to load:', error.message);
     results.tests.push({ name: 'App Loads', status: 'failed', error: error.message });
     results.summary.failed++;
@@ -84,7 +84,7 @@ async function runComprehensiveTests() {
       results.tests.push({ name: 'Auth UI Present', status: 'failed' });
       results.summary.failed++;
     }
-  } catch (error) {
+  } catch (_error) {
     console.log('❌ Auth UI test failed:', error.message);
     results.tests.push({ name: 'Auth UI Present', status: 'failed', error: error.message });
     results.summary.failed++;
@@ -120,7 +120,7 @@ async function runComprehensiveTests() {
       console.log('⏭️  Demo mode not available (user might be logged in)');
       results.tests.push({ name: 'Demo Mode', status: 'skipped' });
     }
-  } catch (error) {
+  } catch (_error) {
     console.log('❌ Demo mode test failed:', error.message);
     results.tests.push({ name: 'Demo Mode', status: 'failed', error: error.message });
     results.summary.failed++;
@@ -135,7 +135,7 @@ async function runComprehensiveTests() {
     console.log('✅ TypeScript compilation succeeds');
     results.tests.push({ name: 'TypeScript Compilation', status: 'passed' });
     results.summary.passed++;
-  } catch (error) {
+  } catch (_error) {
     console.log('❌ TypeScript compilation failed');
     results.tests.push({ name: 'TypeScript Compilation', status: 'failed', error: 'TS errors' });
     results.summary.failed++;
@@ -149,7 +149,7 @@ async function runComprehensiveTests() {
     console.log('✅ Build succeeds');
     results.tests.push({ name: 'Build Process', status: 'passed' });
     results.summary.passed++;
-  } catch (error) {
+  } catch (_error) {
     console.log('❌ Build failed');
     results.tests.push({ name: 'Build Process', status: 'failed' });
     results.summary.failed++;
@@ -170,7 +170,7 @@ async function runComprehensiveTests() {
       results.tests.push({ name: 'Unit Tests', status: 'failed' });
       results.summary.failed++;
     }
-  } catch (error) {
+  } catch (_error) {
     console.log('❌ Unit tests failed');
     results.tests.push({ name: 'Unit Tests', status: 'failed' });
     results.summary.failed++;

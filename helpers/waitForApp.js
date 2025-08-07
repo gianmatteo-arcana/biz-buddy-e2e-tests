@@ -26,7 +26,7 @@ async function waitForAppReady(page, options = {}) {
     });
     
     return appState;
-  } catch (error) {
+  } catch (_error) {
     console.error('❌ Timeout waiting for app initialization');
     
     // Try to get partial state
