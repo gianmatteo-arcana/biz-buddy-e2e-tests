@@ -1,0 +1,56 @@
+{
+  "timestamp": "2025-08-08T01:03:12.721Z",
+  "status": "COMPLETED",
+  "app_loaded": true,
+  "authentication_method": null,
+  "authenticated": false,
+  "dev_toolkit_found": false,
+  "dev_toolkit_window_opened": false,
+  "dev_toolkit_has_content": false,
+  "window_analysis": null,
+  "tabs_tested": [],
+  "screenshots": [
+    {
+      "filename": "01-01-initial-load.png",
+      "description": "Initial app load",
+      "timestamp": "2025-08-08T01:03:18.221Z"
+    },
+    {
+      "filename": "02-02-auth-error.png",
+      "description": "Authentication error",
+      "timestamp": "2025-08-08T01:03:18.275Z"
+    },
+    {
+      "filename": "03-03-dev-mode-enabled.png",
+      "description": "Developer mode enabled",
+      "timestamp": "2025-08-08T01:03:22.572Z"
+    },
+    {
+      "filename": "04-03-dev-toolkit-not-found.png",
+      "description": "Dev Toolkit button not found",
+      "timestamp": "2025-08-08T01:03:22.626Z"
+    },
+    {
+      "filename": "05-99-final-main-app.png",
+      "description": "Final state of main application",
+      "timestamp": "2025-08-08T01:03:22.693Z"
+    }
+  ],
+  "errors": [
+    "Authentication failed: page.evaluate: SyntaxError: Failed to execute 'querySelector' on 'Document': 'button:has-text(\"Sign\"), button:has-text(\"Google\"), button:has-text(\"Login\")' is not a valid selector.\n    at eval (eval at evaluate (:291:30), <anonymous>:4:37)\n    at UtilityScript.evaluate (<anonymous>:293:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)"
+  ],
+  "summary": {
+    "app_loaded": true,
+    "authenticated": false,
+    "authentication_method": null,
+    "dev_toolkit_found": false,
+    "dev_toolkit_window_opened": false,
+    "dev_toolkit_has_content": false,
+    "dev_toolkit_working": false,
+    "tabs_tested": 0,
+    "tabs_working": 0,
+    "screenshots_taken": 5,
+    "errors": 1,
+    "overall_success": false
+  }
+}

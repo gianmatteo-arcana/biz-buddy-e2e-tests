@@ -1,0 +1,44 @@
+{
+  "timestamp": "2025-08-08T05:34:12.233Z",
+  "consoleLogs": [
+    "[error] X-Frame-Options may only be set via an HTTP header sent along with a document. It may not be set inside <meta>.",
+    "[error] Refused to load the script 'https://cdn.gpteng.co/lovable.js' because it violates the following Content Security Policy directive: \"script-src 'self' 'unsafe-inline' 'unsafe-eval'\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback.\n",
+    "[debug] [vite] connecting...",
+    "[debug] [vite] connected.",
+    "[info] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold",
+    "[log] [DevToolkit] Console logging initialized",
+    "[log] [DevToolkit] Auth diagnostics available via window.authDiagnostics",
+    "[log] [DevToolkit] Run authDiagnostics.runFullDiagnostic() for OAuth help",
+    "[log] [DevToolkit] Console logging initialized",
+    "[log] [DevToolkit] Auth diagnostics available via window.authDiagnostics",
+    "[log] [DevToolkit] Run authDiagnostics.runFullDiagnostic() for OAuth help"
+  ],
+  "pageErrors": [],
+  "reactInfo": {
+    "hasRoot": true,
+    "rootHTML": "<div role=\"region\" aria-label=\"Notifications (F8)\" tabindex=\"-1\" style=\"pointer-events: none;\"><ol tabindex=\"-1\" data-lov-id=\"src/components/ui/toaster.tsx:30:6\" data-lov-name=\"ToastViewport\" data-component-path=\"src/components/ui/toaster.tsx\" data-component-line=\"30\" data-component-file=\"toaster.tsx\" data-component-name=\"ToastViewport\" data-component-content=\"%7B%7D\" class=\"fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-",
+    "rootChildren": 2,
+    "hasReact": false,
+    "reactDevTools": true,
+    "bodyText": "Dev ToolkitAgent VisualizerConsoleLive StreamTask HistoryMigrationsOAuthAgent Orchestration VisualizerGenerate DemoFlowTimelineMetricsData",
+    "componentCount": 2,
+    "documentTitle": "Dev Toolkit - BizBuddy",
+    "scripts": [],
+    "hasDevToolkitComponent": true
+  },
+  "devToolkitElements": {
+    "elementsFound": {
+      "Dev Toolkit": true,
+      "Agent Visualizer": true,
+      "Console": true,
+      "Migrations": true,
+      "OAuth": true
+    },
+    "hasToolkitClasses": true,
+    "hasCardClasses": true,
+    "allClassNames": [
+      "dev-toolkit-standalone"
+    ]
+  },
+  "url": "https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/dev-toolkit-standalone"
+}

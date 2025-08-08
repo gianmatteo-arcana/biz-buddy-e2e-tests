@@ -1,0 +1,6 @@
+{
+  "timestamp": "2025-08-08T00:49:41.750Z",
+  "error": "page.evaluate: TypeError: el.className?.toLowerCase is not a function\n    at eval (eval at evaluate (:291:30), <anonymous>:50:39)\n    at Array.filter (<anonymous>)\n    at eval (eval at evaluate (:291:30), <anonymous>:48:70)\n    at UtilityScript.evaluate (<anonymous>:293:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+  "stack": "page.evaluate: TypeError: el.className?.toLowerCase is not a function\n    at eval (eval at evaluate (:291:30), <anonymous>:50:39)\n    at Array.filter (<anonymous>)\n    at eval (eval at evaluate (:291:30), <anonymous>:48:70)\n    at UtilityScript.evaluate (<anonymous>:293:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at testDevToolkitWithAuth (/Users/gianmatteo/Documents/Arcana-Prototype/biz-buddy-e2e-tests/dev-toolkit-auth-flow-test.js:96:41)",
+  "screenshots": 3
+}

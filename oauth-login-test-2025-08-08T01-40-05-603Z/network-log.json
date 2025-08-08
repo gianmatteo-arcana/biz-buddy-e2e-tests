@@ -1,0 +1,152 @@
+[
+  {
+    "url": "https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/node_modules/.vite/deps/class-varian",
+    "status": 200,
+    "statusText": ""
+  },
+  {
+    "url": "https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/src/integrations/supabase/client.ts",
+    "status": 200,
+    "statusText": ""
+  },
+  {
+    "url": "https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/src/utils/debug-auth.ts",
+    "status": 200,
+    "statusText": ""
+  },
+  {
+    "url": "https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/node_modules/.vite/deps/@supabase_su",
+    "status": 200,
+    "statusText": ""
+  },
+  {
+    "url": "https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/src/utils/authDiagnostics.ts?t=17546",
+    "status": 200,
+    "statusText": ""
+  },
+  {
+    "url": "https://raenkewzlvrdqufwxjpl.supabase.co/auth/v1/authorize?provider=google&redirect_to=https%3A%2F%2",
+    "status": 302,
+    "statusText": ""
+  },
+  {
+    "url": "https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&client_id=429921034231-jsdrp6dik68e",
+    "status": 302,
+    "statusText": ""
+  },
+  {
+    "url": "https://accounts.google.com/v3/signin/identifier?opparams=%253Fredirect_to%253Dhttps%25253A%25252F%2",
+    "status": 200,
+    "statusText": ""
+  },
+  {
+    "url": "https://fonts.gstatic.com/s/googlesans/v62/4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2vgCIhM907w.woff2",
+    "status": 200,
+    "statusText": ""
+  },
+  {
+    "url": "https://accounts.google.com/_/bscframe",
+    "status": 200,
+    "statusText": ""
+  },
+  {
+    "url": "https://accounts.youtube.com/accounts/CheckConnection?pmpo=https%3A%2F%2Faccounts.google.com&v=39591",
+    "status": 200,
+    "statusText": ""
+  },
+  {
+    "url": "https://accounts.google.com/generate_204?VOcITw",
+    "status": 204,
+    "statusText": ""
+  },
+  {
+    "url": "https://play.google.com/log?hasfast=true&authuser=0&format=json",
+    "status": 200,
+    "statusText": ""
+  },
+  {
+    "url": "https://play.google.com/log?hasfast=true&authuser=0&format=json",
+    "status": 200,
+    "statusText": ""
+  },
+  {
+    "url": "https://play.google.com/log?hasfast=true&authuser=0&format=json",
+    "status": 200,
+    "statusText": ""
+  },
+  {
+    "url": "https://accounts.google.com/v3/signin/_/AccountsSignInUi/data/batchexecute?rpcids=MI613e&source-path",
+    "status": 200,
+    "statusText": ""
+  },
+  {
+    "url": "https://accounts.google.com/v3/signin/_/AccountsSignInUi/data/batchexecute?rpcids=WZfWSd%2CetGTrd%2C",
+    "status": 200,
+    "statusText": ""
+  },
+  {
+    "url": "https://accounts.google.com/generate_204?Jx8WTQ",
+    "status": 204,
+    "statusText": ""
+  },
+  {
+    "url": "https://play.google.com/log?hasfast=true&authuser=0&format=json",
+    "status": 200,
+    "statusText": ""
+  },
+  {
+    "url": "https://accounts.google.com/v3/signin/_/AccountsSignInUi/browserinfo?f.sid=2584413824343648675&bl=bo",
+    "status": 200,
+    "statusText": ""
+  },
+  {
+    "url": "https://play.google.com/log?hasfast=true&authuser=0&format=json",
+    "status": 200,
+    "statusText": ""
+  },
+  {
+    "url": "https://accounts.google.com/v3/signin/_/AccountsSignInUi/data/batchexecute?rpcids=B4hajb&source-path",
+    "status": 200,
+    "statusText": ""
+  },
+  {
+    "url": "https://accounts.google.com/CheckCookie?continue=https://accounts.google.com/signin/oauth/consent?au",
+    "status": 302,
+    "statusText": ""
+  },
+  {
+    "url": "https://accounts.youtube.com/accounts/SetSID?ssdc=1&sidt=ALWU2csx7fZ8ezejK2ImCEWpNg4EI%2BTr2YD2eLVJT",
+    "status": 200,
+    "statusText": ""
+  },
+  {
+    "url": "https://accounts.google.com/signin/oauth/consent?authuser=0&part=AJi8hANVZEttt9IOt3UjGLFtF3ArezCqnD0",
+    "status": 302,
+    "statusText": ""
+  },
+  {
+    "url": "https://accounts.google.com/signin/oauth/id?authuser=0&part=AJi8hAOSMz5YnS0Gv58z5Q82uqZTJcGo4-vSDXXp",
+    "status": 200,
+    "statusText": ""
+  },
+  {
+    "url": "https://fonts.gstatic.com/s/googlesans/v62/4UaRrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iq2vgCIhM907w.woff2",
+    "status": 200,
+    "statusText": ""
+  },
+  {
+    "url": "https://lh3.googleusercontent.com/a/ACg8ocKBhLltibEzVL0JBtm6QVgpsbvyXyJTZTRXwUJvNahfMq_L3g=s128-c-mo",
+    "status": 200,
+    "statusText": ""
+  },
+  {
+    "url": "https://play.google.com/log?format=json&hasfast=true&authuser=0",
+    "status": 200,
+    "statusText": ""
+  },
+  {
+    "url": "https://accounts.google.com/_/OAuthUi/browserinfo?f.sid=5527006423007564941&bl=boq_identity-oauth-ht",
+    "status": 200,
+    "statusText": ""
+  }
+]

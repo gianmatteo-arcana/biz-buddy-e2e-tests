@@ -1,0 +1,11 @@
+{
+  "timestamp": "2025-08-08T05:23:50.306Z",
+  "success": false,
+  "devToolkitFound": false,
+  "tabsFound": 0,
+  "screenshots": [
+    "01-main-app.png",
+    "02-dev-toolkit-standalone.png",
+    "page-analysis.json"
+  ]
+}

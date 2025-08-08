@@ -1,0 +1,5 @@
+{
+  "error": "expandClicked is not defined",
+  "stack": "ReferenceError: expandClicked is not defined\n    at testDevToolkitUI (/Users/gianmatteo/Documents/Arcana-Prototype/biz-buddy-e2e-tests/test-dev-toolkit-ui.js:169:36)",
+  "timestamp": "2025-08-08T05:43:03.870Z"
+}

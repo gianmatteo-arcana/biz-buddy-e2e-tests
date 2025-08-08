@@ -1,0 +1,17 @@
+{
+  "timestamp": "2025-08-08T05:31:14.117Z",
+  "standalonePageWorks": false,
+  "devToolkitButtonPresent": true,
+  "tabsFound": 0,
+  "restoredFeatures": {
+    "agentVisualizer": false,
+    "console": false,
+    "migrations": false,
+    "oauth": false
+  },
+  "screenshots": [
+    "01-dev-toolkit-standalone.png",
+    "02-main-app-with-button.png",
+    "page-analysis.json"
+  ]
+}

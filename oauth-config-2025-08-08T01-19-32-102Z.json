@@ -1,0 +1,27 @@
+{
+  "environment": {
+    "origin": "https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com",
+    "hostname": "c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com",
+    "href": "https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/?__lovable_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiOVdvb0s1Q2UyUGFjN2tIM3RTSzBNdTFYT1ZJMiIsInByb2plY3RfaWQiOiJjOGViMmQ4Ni1kNzlkLTQ3MGQtYjI5Yy03YTgyZDIyMDM0NmIiLCJyb2xlIjoib3duZXIiLCJub25jZSI6ImJjY2ZiN2U2YTVkMzZiZTExYWQwNzgxMmU4NmZkYTBlIiwiaXNzIjoibG92YWJsZS1hcGkiLCJzdWIiOiJjOGViMmQ4Ni1kNzlkLTQ3MGQtYjI5Yy03YTgyZDIyMDM0NmIiLCJhdWQiOlsibG92YWJsZS1hcHAiXSwiZXhwIjoxNzU1MjE4MjUyLCJuYmYiOjE3NTQ2MTM0NTIsImlhdCI6MTc1NDYxMzQ1Mn0.D6dTZcv5SpAWyscO3U9SXVDN5r6lBcv1F0_FNBZ-Exw",
+    "projectId": "c8eb2d86-d79d-470d-b29c-7a82d220346b",
+    "isLovableProject": true,
+    "hasToken": true
+  },
+  "requiredUrls": {
+    "javascriptOrigin": "https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com",
+    "redirectUri": "https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/auth/callback",
+    "supabaseRedirectUri": "https://raenkewzlvrdqufwxjpl.supabase.co/auth/v1/callback"
+  },
+  "googleConsoleUrls": {
+    "authorizedJavaScriptOrigins": [
+      "https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com"
+    ],
+    "authorizedRedirectURIs": [
+      "https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/auth/callback",
+      "https://raenkewzlvrdqufwxjpl.supabase.co/auth/v1/callback"
+    ]
+  },
+  "supabaseDashboard": {
+    "siteURL": "https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com"
+  }
+}

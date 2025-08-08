@@ -1,0 +1,6 @@
+{
+  "timestamp": "2025-08-08T00:46:20.234Z",
+  "error": "page.evaluate: SyntaxError: Failed to execute 'querySelector' on 'Document': 'button:has-text(\"Sign\"), button:has-text(\"Google\"), button:has-text(\"Login\")' is not a valid selector.\n    at eval (eval at evaluate (:291:30), <anonymous>:21:35)\n    at UtilityScript.evaluate (<anonymous>:293:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+  "stack": "page.evaluate: SyntaxError: Failed to execute 'querySelector' on 'Document': 'button:has-text(\"Sign\"), button:has-text(\"Google\"), button:has-text(\"Login\")' is not a valid selector.\n    at eval (eval at evaluate (:291:30), <anonymous>:21:35)\n    at UtilityScript.evaluate (<anonymous>:293:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at debugDevToolkitStepByStep (/Users/gianmatteo/Documents/Arcana-Prototype/biz-buddy-e2e-tests/debug-dev-toolkit-step-by-step.js:56:37)",
+  "screenshots": 2
+}

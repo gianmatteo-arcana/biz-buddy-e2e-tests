@@ -1,0 +1,42 @@
+{
+  "timestamp": "2025-08-08T05:32:19.711Z",
+  "consoleLogs": [
+    "[error] X-Frame-Options may only be set via an HTTP header sent along with a document. It may not be set inside <meta>.",
+    "[error] Refused to load the script 'https://cdn.gpteng.co/lovable.js' because it violates the following Content Security Policy directive: \"script-src 'self' 'unsafe-inline' 'unsafe-eval'\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback.\n",
+    "[debug] [vite] connecting...",
+    "[debug] [vite] connected.",
+    "[info] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold",
+    "[error] The above error occurred in the <DevToolkit> component:\n\n    at DevToolkit (https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/src/components/dev/DevToolkit.tsx?t=1754630923063:113:39)\n    at div\n    at DevToolkitStandalone (https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/src/pages/DevToolkitStandalone.tsx?t=1754630923063:18:5)\n    at RenderedRoute (https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/node_modules/.vite/deps/react-router-dom.js?v=bc606f82:4069:5)\n    at Routes (https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/node_modules/.vite/deps/react-router-dom.js?v=bc606f82:4508:5)\n    at Router (https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/node_modules/.vite/deps/react-router-dom.js?v=bc606f82:4451:15)\n    at BrowserRouter (https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/node_modules/.vite/deps/react-router-dom.js?v=bc606f82:5196:5)\n    at Provider (https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/node_modules/.vite/deps/chunk-OFAXGNVV.js?v=1ef5b03e:22:15)\n    at TooltipProvider (https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=d01f5df4:62:5)\n    at QueryClientProvider (https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/node_modules/.vite/deps/@tanstack_react-query.js?v=3224a5a6:2794:3)\n    at App\n    at DemoProvider (https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/src/context/DemoContext.tsx:22:32)\n\nConsider adding an error boundary to your tree to customize error handling behavior.\nVisit https://reactjs.org/link/error-boundaries to learn more about error boundaries.",
+    "[error] The above error occurred in the <DevToolkit> component:\n\n    at DevToolkit (https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/src/components/dev/DevToolkit.tsx?t=1754630923063:113:39)\n    at div\n    at DevToolkitStandalone (https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/src/pages/DevToolkitStandalone.tsx?t=1754630923063:18:5)\n    at RenderedRoute (https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/node_modules/.vite/deps/react-router-dom.js?v=bc606f82:4069:5)\n    at Routes (https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/node_modules/.vite/deps/react-router-dom.js?v=bc606f82:4508:5)\n    at Router (https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/node_modules/.vite/deps/react-router-dom.js?v=bc606f82:4451:15)\n    at BrowserRouter (https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/node_modules/.vite/deps/react-router-dom.js?v=bc606f82:5196:5)\n    at Provider (https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/node_modules/.vite/deps/chunk-OFAXGNVV.js?v=1ef5b03e:22:15)\n    at TooltipProvider (https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=d01f5df4:62:5)\n    at QueryClientProvider (https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/node_modules/.vite/deps/@tanstack_react-query.js?v=3224a5a6:2794:3)\n    at App\n    at DemoProvider (https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/src/context/DemoContext.tsx:22:32)\n\nConsider adding an error boundary to your tree to customize error handling behavior.\nVisit https://reactjs.org/link/error-boundaries to learn more about error boundaries."
+  ],
+  "pageErrors": [
+    "TypeError: taskOrchestrationEvents.subscribe is not a function",
+    "TypeError: taskOrchestrationEvents.subscribe is not a function",
+    "TypeError: taskOrchestrationEvents.subscribe is not a function"
+  ],
+  "reactInfo": {
+    "hasRoot": true,
+    "rootHTML": "",
+    "rootChildren": 0,
+    "hasReact": false,
+    "reactDevTools": true,
+    "bodyText": "",
+    "componentCount": 0,
+    "documentTitle": "Dev Toolkit - BizBuddy",
+    "scripts": [],
+    "hasDevToolkitComponent": false
+  },
+  "devToolkitElements": {
+    "elementsFound": {
+      "Dev Toolkit": true,
+      "Agent Visualizer": false,
+      "Console": false,
+      "Migrations": false,
+      "OAuth": false
+    },
+    "hasToolkitClasses": false,
+    "hasCardClasses": false,
+    "allClassNames": []
+  },
+  "url": "https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/dev-toolkit-standalone"
+}

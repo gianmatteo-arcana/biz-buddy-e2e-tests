@@ -1,0 +1,7 @@
+{
+  "title": "Dev Toolkit - BizBuddy",
+  "hasContent": true,
+  "bodyText": "\n          🛠️ Dev ToolkitOAuth DiagnosticsConsoleInfo🔐 Google OAuth ConfigurationCurrent EnvironmentRequired OAuth URLsIssues Found✅ No issues detectedSetup Instructions1. Google Cloud ConsoleAdd these to your OAuth 2.0 Client ID:Authorized JavaScript origins:Authorized redirect URIs:2. Supabase DashboardAdd this to Site URL:\n        \n      \n    ",
+  "backgroundColor": "rgb(255, 255, 255)",
+  "elementsCount": 36
+}

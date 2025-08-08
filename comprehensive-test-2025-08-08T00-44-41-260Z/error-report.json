@@ -1,0 +1,33 @@
+{
+  "timestamp": "2025-08-08T00:44:41.260Z",
+  "status": "FAILED",
+  "phases": {
+    "phase1": {
+      "status": "COMPLETED",
+      "duration": 11843,
+      "loading_states": {
+        "hasLoadingSpinner": false,
+        "hasErrorMessage": false,
+        "hasContent": true,
+        "title": "SmallBizAlly - AI Compliance Assistant",
+        "url": "https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/"
+      }
+    },
+    "phase2": {
+      "status": "FAILED",
+      "start": 1754613894339,
+      "error": "Dev Toolkit button not found even after enabling dev mode"
+    }
+  },
+  "screenshots": [
+    "01-initial-load.png",
+    "02-no-dev-toolkit-button.png",
+    "03-after-dev-mode-enabled.png",
+    "04-dev-toolkit-analysis-failed.png",
+    "05-test-failed.png"
+  ],
+  "fixes_applied": [],
+  "oauth_flow_result": null,
+  "dev_toolkit_analysis": null,
+  "error": "Dev Toolkit button not found even after enabling dev mode"
+}

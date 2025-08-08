@@ -1,0 +1,57 @@
+{
+  "timestamp": "2025-08-08T00:53:50.257Z",
+  "testDir": "final-dev-toolkit-test-2025-08-08T00-53-49-703Z",
+  "tests": {
+    "demo_auth": {
+      "status": "passed",
+      "details": "Demo mode authentication successful"
+    },
+    "dev_route": {
+      "status": "passed",
+      "details": {
+        "title": "SmallBizAlly - AI Compliance Assistant",
+        "hasContent": false,
+        "contentPreview": "\n    Dev Panel\n    \n  \n\n",
+        "hasDevPanel": true,
+        "is404": false
+      }
+    },
+    "dev_toolkit_button": {
+      "status": "failed",
+      "details": "Code icon button not found"
+    },
+    "dev_toolkit_window": {
+      "status": "skipped",
+      "details": "No Dev Toolkit button available"
+    },
+    "oauth_flow": {
+      "status": "skipped",
+      "details": "No credentials provided in environment variables"
+    }
+  },
+  "screenshots": [
+    "01-initial-load.png",
+    "02-demo-mode-activated.png",
+    "03-dev-route.png"
+  ],
+  "issues_found": [
+    "Dev Toolkit button not visible or accessible"
+  ],
+  "fixes_applied": [],
+  "summary": {
+    "total_tests": 5,
+    "passed": 2,
+    "failed": 1,
+    "skipped": 2
+  },
+  "environment": {
+    "url": "https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com",
+    "timestamp": "2025-08-08T00:54:30.184Z",
+    "hasOAuthCredentials": false
+  },
+  "recommendations": [
+    "Issues found that need attention:",
+    "• Dev Toolkit button not visible or accessible",
+    "• Set GOOGLE_TEST_PASSWORD environment variable to test OAuth flow"
+  ]
+}

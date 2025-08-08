@@ -1,0 +1,5 @@
+{
+  "error": "migrationInfo is not defined",
+  "stack": "ReferenceError: migrationInfo is not defined\n    at testMigrationStatus (/Users/gianmatteo/Documents/Arcana-Prototype/biz-buddy-e2e-tests/test-migration-status.js:158:15)",
+  "timestamp": "2025-08-08T05:58:58.341Z"
+}

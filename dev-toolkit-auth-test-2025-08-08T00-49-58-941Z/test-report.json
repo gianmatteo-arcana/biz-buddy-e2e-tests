@@ -1,0 +1,32 @@
+{
+  "timestamp": "2025-08-08T00:49:59.374Z",
+  "phases": {},
+  "screenshots": [],
+  "devToolkitFound": true,
+  "authMethod": "demo_mode",
+  "devToolkitAnalysis": {
+    "url": "https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/dev",
+    "title": "SmallBizAlly - AI Compliance Assistant",
+    "hasContent": false,
+    "contentPreview": "\n    Dev Panel\n    \n  \n\n",
+    "is404": false,
+    "hasDevContent": true
+  },
+  "success": true,
+  "totalScreenshots": 4,
+  "searchResults": {
+    "buttons": [],
+    "devElements": [],
+    "codeIcons": [
+      {
+        "buttonText": "",
+        "buttonClasses": "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border bg-background hover:bg-accent hover:text-accent-foreground h-10 w-10 fixed bottom-4 right-4 z-[9999] bg-gradient-to-r from-purple-900 to-blue-900 text-white border-purple-400 hover:from-purple-800 hover:to-blue-800 shadow-lg",
+        "iconClasses": {},
+        "visible": false
+      }
+    ],
+    "devRoutes": [],
+    "consoleElements": []
+  },
+  "summary": "Dev Toolkit successfully found and tested"
+}
