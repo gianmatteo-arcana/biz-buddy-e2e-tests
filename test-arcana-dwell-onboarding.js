@@ -98,7 +98,7 @@ class ArcanaDwellOnboardingTest {
     
     // Click Get Started
     await this.page.click('[data-testid="get-started"]');
-    await this.page.waitForTimeout(2000);
+    await new Promise(r => setTimeout(r, 2000));
     
     // Check for API unavailable message
     const apiUnavailableMessage = await this.page.evaluate(() => {
@@ -147,12 +147,12 @@ class ArcanaDwellOnboardingTest {
     const businessCard = await this.page.$('.cursor-pointer');
     if (businessCard) {
       await businessCard.click();
-      await this.page.waitForTimeout(3000);
+      await new Promise(r => setTimeout(r, 3000));
       
       // Check for correct profile data
       const profileData = await this.page.evaluate((groundTruth) => {
         const inputs = Array.from(document.querySelectorAll('input[readonly]'));
-        const values = inputs.map(input => (input as HTMLInputElement).value);
+        const values = inputs.map(input => input.value);
         
         return {
           hasBusinessName: values.some(v => v.includes(groundTruth.business.name)),
@@ -186,7 +186,7 @@ class ArcanaDwellOnboardingTest {
     console.log('\n⚖️ Testing Compliance Requirements');
     console.log('-----------------------------------');
     
-    await this.page.waitForTimeout(5000);
+    await new Promise(r => setTimeout(r, 5000));
     
     // Check for wine bar specific requirements
     const complianceChecks = await this.page.evaluate(() => {
