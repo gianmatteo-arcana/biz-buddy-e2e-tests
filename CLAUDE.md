@@ -1,5 +1,26 @@
 # E2E Testing Standards - Claude Code Guidelines
 
+## 🔴 MANDATORY: PLAYWRIGHT TESTING STANDARDS FOR REACT
+
+**CRITICAL: All E2E tests MUST follow the Playwright Testing Standards documented in `PLAYWRIGHT_TESTING_STANDARDS.md`**
+
+### Core Principles - NO EXCEPTIONS:
+1. **NO arbitrary timeouts** - Use `data-testid` and `data-loaded` attributes
+2. **Explicit over implicit** - App signals when ready, tests don't guess
+3. **Test-specific attributes** - Use `data-testid` for selectors, never CSS classes
+4. **Deterministic waits** - Wait for `data-loaded="true"` not `waitForTimeout()`
+
+### Required Test Pattern:
+```javascript
+// ✅ CORRECT - Deterministic wait
+await page.waitForSelector('[data-testid="user-list"][data-loaded="true"]');
+
+// ❌ WRONG - Arbitrary timeout
+await page.waitForTimeout(3000);
+```
+
+See `PLAYWRIGHT_TESTING_STANDARDS.md` for complete implementation guide.
+
 ## 🚨 CRITICAL: USE THE STANDARDIZED E2E TEST FRAMEWORK
 
 **ALL E2E user story tests MUST use the BaseUserStoryTest framework located in `framework/BaseUserStoryTest.js`**
