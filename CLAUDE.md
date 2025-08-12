@@ -1,5 +1,24 @@
 # E2E Testing Standards - Claude Code Guidelines
 
+## 🚨 CRITICAL: USE THE STANDARDIZED E2E TEST FRAMEWORK
+
+**ALL E2E user story tests MUST use the BaseUserStoryTest framework located in `framework/BaseUserStoryTest.js`**
+
+### Framework Documentation
+- **Main Documentation**: `E2E_TEST_FRAMEWORK.md` - READ THIS FIRST
+- **Base Class**: `framework/BaseUserStoryTest.js` - DO NOT MODIFY
+- **Template**: `framework/UserStoryTemplate.js` - Copy for new tests
+- **Example**: `test-arcana-dwell-user-story.js` - Reference implementation
+
+### Creating New E2E Tests - MANDATORY PROCESS
+1. Copy `framework/UserStoryTemplate.js` to new file
+2. Update config with user story details and ground truths
+3. Implement `runUserStory()` method with test logic
+4. Add to `test-suite.js` for suite execution
+5. Run with `node test-[name]-story.js`
+
+**NEVER create standalone E2E tests outside this framework!**
+
 ## 🎯 MANDATORY: Use Playwright Only
 
 **CRITICAL**: All E2E tests MUST use Playwright. Do NOT use Puppeteer.

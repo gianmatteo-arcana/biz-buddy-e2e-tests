@@ -1,0 +1,21 @@
+{
+  "timestamp": "2025-08-11T01:39:16.638Z",
+  "testDirectory": "test-real-task-2025-08-11T01-39-01-327Z",
+  "authenticated": false,
+  "screenshotCount": 2,
+  "screenshots": [
+    "01-authenticated-app.png",
+    "02-dev-toolkit-opened.png"
+  ],
+  "finalState": {
+    "taskMentions": 0,
+    "agentMentions": 0,
+    "orchestratorMentions": 0,
+    "eventMentions": 0,
+    "hasCompleted": false,
+    "hasDemo": true,
+    "hasRealData": false
+  },
+  "isRealData": false,
+  "taskCreated": "Already existed"
+}

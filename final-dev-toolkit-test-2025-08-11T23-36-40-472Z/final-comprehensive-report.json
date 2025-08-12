@@ -1,0 +1,54 @@
+{
+  "timestamp": "2025-08-11T23:36:41.013Z",
+  "testDir": "final-dev-toolkit-test-2025-08-11T23-36-40-472Z",
+  "tests": {
+    "demo_auth": {
+      "status": "failed",
+      "details": "page.waitForSelector: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"Demo Mode\")') to be visible\u001b[22m\n"
+    },
+    "dev_route": {
+      "status": "failed",
+      "details": "Dev route not accessible or empty"
+    },
+    "dev_toolkit_button": {
+      "status": "failed",
+      "details": "Code icon button not found"
+    },
+    "dev_toolkit_window": {
+      "status": "skipped",
+      "details": "No Dev Toolkit button available"
+    },
+    "oauth_flow": {
+      "status": "failed",
+      "details": "Google OAuth button not found"
+    }
+  },
+  "screenshots": [
+    "01-initial-load.png",
+    "02-dev-route.png"
+  ],
+  "issues_found": [
+    "Demo mode authentication failed",
+    "/dev route not working properly",
+    "Dev Toolkit button not visible or accessible"
+  ],
+  "fixes_applied": [],
+  "summary": {
+    "total_tests": 5,
+    "passed": 0,
+    "failed": 4,
+    "skipped": 1
+  },
+  "environment": {
+    "url": "https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com",
+    "timestamp": "2025-08-11T23:37:00.372Z",
+    "hasOAuthCredentials": false
+  },
+  "recommendations": [
+    "Issues found that need attention:",
+    "• Demo mode authentication failed",
+    "• /dev route not working properly",
+    "• Dev Toolkit button not visible or accessible",
+    "• Set GOOGLE_TEST_PASSWORD environment variable to test OAuth flow"
+  ]
+}

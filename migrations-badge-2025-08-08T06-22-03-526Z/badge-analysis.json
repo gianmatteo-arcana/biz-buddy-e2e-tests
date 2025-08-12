@@ -1,0 +1,48 @@
+{
+  "timestamp": "2025-08-08T06:22:21.033Z",
+  "migrationsBadgeInfo": {
+    "found": true,
+    "buttonText": "Migrations2",
+    "buttonClasses": "flex items-center gap-2 px-3 py-2 rounded text-sm font-medium transition-colors text-muted-foreground hover:text-foreground",
+    "hasBadge": false,
+    "pendingElementsFound": 0,
+    "buttonHTML": "<button data-lov-id=\"src/components/dev/DevToolkit.tsx:419:8\" data-lov-name=\"button\" data-component-path=\"src/components/dev/DevToolkit.tsx\" data-component-line=\"419\" data-component-file=\"DevToolkit.tsx\" data-component-name=\"button\" data-component-content=\"%7B%7D\" class=\"flex items-center gap-2 px-3 py-2 rounded text-sm font-medium transition-colors text-muted-foreground hover:text-foreground\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"",
+    "children": [
+      {
+        "tag": "svg",
+        "classes": {},
+        "text": ""
+      },
+      {
+        "tag": "SPAN",
+        "classes": "",
+        "text": "Migrations"
+      },
+      {
+        "tag": "DIV",
+        "classes": "inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80 ml-1 px-1 py-0 text-xs",
+        "text": "2"
+      }
+    ]
+  },
+  "consoleLogs": [
+    "[DevToolkit] Checking pending migrations in standalone mode",
+    "[DevToolkit] Console logging initialized",
+    "[DevToolkit] Auth diagnostics available via window.authDiagnostics",
+    "[DevToolkit] Run authDiagnostics.runFullDiagnostic() for OAuth help",
+    "[DevToolkit] Checking pending migrations in standalone mode",
+    "[DevToolkit] Console logging initialized",
+    "[DevToolkit] Auth diagnostics available via window.authDiagnostics",
+    "[DevToolkit] Run authDiagnostics.runFullDiagnostic() for OAuth help",
+    "[DevToolkit] Pending migrations (standalone): 2 JSHandle@array",
+    "[DevToolkit] Pending migrations (standalone): 2 JSHandle@array",
+    "[DevToolkit] Checking pending migrations in standalone mode",
+    "[DevToolkit] Pending migrations (standalone): 2 JSHandle@array",
+    "[SECURE] migrations_loaded: SUCCESS JSHandle@object",
+    "[SECURE] migrations_loaded: SUCCESS JSHandle@object"
+  ],
+  "screenshots": [
+    "01-dev-toolkit-initial.png",
+    "02-migrations-tab-open.png"
+  ]
+}

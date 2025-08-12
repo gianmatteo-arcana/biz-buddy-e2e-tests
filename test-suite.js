@@ -7,6 +7,7 @@
  */
 
 const { ArcanaDwellE2ETest } = require('./test-arcana-dwell-user-story');
+const DashboardAnalyticsStoryTest = require('./test-example-dashboard-story');
 const fs = require('fs').promises;
 const path = require('path');
 const { exec } = require('child_process');
@@ -21,7 +22,20 @@ class E2ETestSuite {
         description: 'Validates ground truths and resilient architecture',
         runner: () => new ArcanaDwellE2ETest(true).run()
       },
-      // Add more tests here as needed
+      {
+        name: 'Dashboard Analytics Story',
+        description: 'Validates dashboard analytics feature with real data',
+        runner: () => new DashboardAnalyticsStoryTest().run()
+      },
+      // TO ADD MORE TESTS:
+      // 1. Create new test file extending BaseUserStoryTest
+      // 2. Import it here: const MyTest = require('./test-my-story');
+      // 3. Add to this array:
+      // {
+      //   name: 'My User Story',
+      //   description: 'What it validates',
+      //   runner: () => new MyTest().run()
+      // },
     ];
     
     this.results = {

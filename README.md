@@ -1,22 +1,33 @@
-# BizBuddy E2E Tests
+# E2E Tests - Simple & Fast
 
-End-to-end tests for BizBuddy with Google OAuth authentication support.
+## 🚀 Just Two Commands
 
-## 🚀 Quick Start
-
+### 1. Update Authentication (when needed)
 ```bash
-# Install dependencies
-npm install
-
-# First time setup (configure test credentials)
-npm run setup
-
-# Capture auth state (opens browser for Google login)
-npm run auth:refresh
-
-# Run tests
-npm test
+node update-test-auth.js
 ```
+Opens browser → You sign in → Press Enter → Done!
+
+### 2. Run Tests (anytime)
+```bash
+node run-e2e-test.js
+```
+Uses saved auth → No sign-in needed → Gets screenshots!
+
+## That's It! 🎉
+
+- **Sign in once** - Auth persists for ~1 hour
+- **Run tests repeatedly** - No re-authentication
+- **Real backend data** - Not mock/demo data
+- **Screenshots saved** - Visual proof in `test-results-*/`
+
+## The Dev Cycle
+
+```
+Code → Push to GitHub → node run-e2e-test.js → Check screenshots → Repeat
+```
+
+No authentication delays. Just fast iteration.
 
 ## 📚 Documentation
 

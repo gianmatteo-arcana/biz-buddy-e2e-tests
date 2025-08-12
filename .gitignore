@@ -56,3 +56,11 @@ console.log
 network.log
 state.json
 summary.json
+# Authentication files (E2E tests)
+.auth-session.json
+.auth-credentials.json
+
+# Test results (shouldn't be in repo, but just in case)
+test-run-*
+test-results-*
+

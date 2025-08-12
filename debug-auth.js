@@ -1,93 +1,88 @@
-const { chromium } = require('@playwright/test');
-const fs = require('fs');
+const puppeteer = require('puppeteer');
+const fs = require('fs').promises;
+const path = require('path');
 
-(async () => {
-  console.log('🔍 Debug Auth State\n');
+const APP_URL = 'https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com';
+const SESSION_FILE = path.join(__dirname, '.auth-session.json');
+
+async function debugAuth() {
+  console.log('🔍 Debug Auth - Checking localStorage injection');
+  console.log('===============================================\\n');
   
-  // Read the auth file
-  const authState = JSON.parse(fs.readFileSync('.auth/user-state.json', 'utf8'));
+  // Load auth
+  const data = await fs.readFile(SESSION_FILE, 'utf8');
+  const session = JSON.parse(data);
   
-  console.log('Auth file contains:');
-  console.log(`- ${authState.cookies.length} cookies`);
-  console.log(`- ${authState.origins.length} origins\n`);
-  
-  // Check for BizBuddy localStorage
-  const bizBuddyOrigin = authState.origins.find(o => 
-    o.origin.includes('lovableproject.com')
-  );
-  
-  if (bizBuddyOrigin && bizBuddyOrigin.localStorage) {
-    console.log('BizBuddy localStorage items:');
-    bizBuddyOrigin.localStorage.forEach(item => {
-      console.log(`- ${item.name}`);
-      if (item.name.includes('auth-token')) {
-        try {
-          const tokenData = JSON.parse(item.value);
-          const expiresAt = new Date(tokenData.expires_at * 1000);
-          const now = new Date();
-          const isExpired = expiresAt < now;
-          console.log(`  Token expires at: ${expiresAt.toLocaleString()}`);
-          console.log(`  Token expired: ${isExpired}`);
-        } catch (_e) {
-          console.log('  Could not parse token data');
-        }
-      }
-    });
-  }
-  
-  console.log('\n🧪 Testing with Playwright...\n');
-  
-  // Test 1: Load state during browser launch
-  console.log('Test 1: Load state during context creation');
-  const browser1 = await chromium.launch({ headless: false });
-  const context1 = await browser1.newContext({
-    storageState: '.auth/user-state.json'
+  console.log('📄 Saved session:', {
+    hasAccessToken: !!session.access_token,
+    hasRefreshToken: !!session.refresh_token,
+    hasUser: !!session.user,
+    userEmail: session.user?.email
   });
-  const page1 = await context1.newPage();
   
-  await page1.goto('https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com');
-  await page1.waitForTimeout(5000);
+  const browser = await puppeteer.launch({
+    headless: false,
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
+  });
   
-  console.log('URL after navigation:', page1.url());
-  const welcomeVisible1 = await page1.locator('text=Welcome back').isVisible().catch(() => false);
-  console.log('Welcome message visible:', welcomeVisible1);
+  const page = await browser.newPage();
   
-  await page1.screenshot({ path: 'test-results/debug-test1.png' });
-  await browser1.close();
+  // Track console logs
+  page.on('console', msg => {
+    console.log('   🖥️ ', msg.text());
+  });
   
-  console.log('\n' + '='.repeat(50) + '\n');
-  
-  // Test 2: Load state after context creation
-  console.log('Test 2: Load state after page creation');
-  const browser2 = await chromium.launch({ headless: false });
-  const context2 = await browser2.newContext();
-  const page2 = await context2.newPage();
-  
-  // Load auth state after page is created
-  await context2.addCookies(authState.cookies);
-  
-  // Set localStorage
-  await page2.goto('https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com');
-  
-  if (bizBuddyOrigin && bizBuddyOrigin.localStorage) {
-    await page2.evaluate((items) => {
-      items.forEach(item => {
-        localStorage.setItem(item.name, item.value);
-      });
-    }, bizBuddyOrigin.localStorage);
+  // Inject auth - same as test
+  await page.evaluateOnNewDocument((authData) => {
+    const supabaseKey = `sb-raenkewzlvrdqufwxjpl-auth-token`;
+    const authSession = {
+      access_token: authData.access_token,
+      token_type: 'bearer',
+      user: authData.user || null,
+      expires_at: Date.now() + 3600000,
+      expires_in: 3600,
+      refresh_token: authData.refresh_token || null
+    };
     
-    // Reload to apply localStorage
-    await page2.reload();
-  }
+    console.log('🔧 Injecting auth:', { hasToken: !!authSession.access_token, userEmail: authSession.user?.email });
+    
+    localStorage.setItem(supabaseKey, JSON.stringify({
+      currentSession: authSession,
+      expiresAt: Date.now() + 3600000
+    }));
+    localStorage.setItem('supabase.auth.token', JSON.stringify(authSession));
+    console.log('✅ localStorage set, keys:', Object.keys(localStorage));
+  }, session);
   
-  await page2.waitForTimeout(5000);
+  console.log('\\n📍 Loading page...');
+  await page.goto(APP_URL);
   
-  console.log('URL after navigation:', page2.url());
-  const welcomeVisible2 = await page2.locator('text=Welcome back').isVisible().catch(() => false);
-  console.log('Welcome message visible:', welcomeVisible2);
+  // Check what's actually in localStorage
+  console.log('\\n📍 Checking localStorage content...');
+  const localStorageContent = await page.evaluate(() => {
+    const keys = Object.keys(localStorage);
+    console.log('🔍 localStorage keys found:', keys);
+    
+    const result = {};
+    for (const key of keys) {
+      const value = localStorage.getItem(key);
+      result[key] = value;
+      
+      if (key.includes('supabase') || key.includes('auth')) {
+        console.log(`📝 ${key}:`, value.substring(0, 100));
+      }
+    }
+    
+    return result;
+  });
   
-  await page2.screenshot({ path: 'test-results/debug-test2.png' });
-  await browser2.close();
+  console.log('\\n📋 Browser localStorage summary:');
+  Object.keys(localStorageContent).forEach(key => {
+    console.log(`  - ${key}: ${localStorageContent[key] ? 'SET' : 'EMPTY'}`);
+  });
   
-  console.log('\n✅ Debug complete. Check test-results/debug-test1.png and debug-test2.png');
-})();
+  await page.waitForTimeout(5000);
+  await browser.close();
+}
+
+debugAuth().catch(console.error);

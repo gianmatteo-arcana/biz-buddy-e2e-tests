@@ -1,0 +1,32 @@
+{
+  "timestamp": "2025-08-11T00:49:23.171Z",
+  "demo": "QA Engineer Agent Visualizer",
+  "url": "https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/dev-toolkit-standalone",
+  "screenshots": 10,
+  "userStory": {
+    "role": "QA Engineer",
+    "goal": "Investigate stuck onboarding task",
+    "outcome": "Identified low confidence compliance check and created test case"
+  },
+  "findings": [
+    "Compliance check confidence at 70% (below 80% threshold)",
+    "Cannot verify EIN with external service in demo",
+    "State registration status unknown",
+    "Task completed with warnings"
+  ],
+  "testCaseGenerated": {
+    "scenario": "Onboarding with low confidence compliance",
+    "assertions": 4,
+    "coverage": "Authentication, Business Info, Compliance Check"
+  },
+  "features_demonstrated": [
+    "Timeline visualization with agent swimlanes",
+    "Context evolution tracking",
+    "Agent reasoning and confidence scores",
+    "Alternative path analysis",
+    "Risk identification",
+    "Test case generation",
+    "Timeline replay for debugging",
+    "Export functionality for test automation"
+  ]
+}

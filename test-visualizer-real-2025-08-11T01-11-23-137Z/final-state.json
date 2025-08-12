@@ -1,0 +1,19 @@
+{
+  "timestamp": "2025-08-11T01:11:45.055Z",
+  "url": "https://c8eb2d86-d79d-470d-b29c-7a82d220346b.lovableproject.com/dev-toolkit-standalone",
+  "title": "Dev Toolkit - BizBuddy",
+  "hasRealTimeData": true,
+  "dataIndicators": {
+    "taskPresent": true,
+    "eventsPresent": false,
+    "agentsPresent": true,
+    "contextPresent": false,
+    "reasoningPresent": false
+  },
+  "textSnippets": [
+    "Agent Visualizer",
+    "Task History",
+    "Real-Time Agent Visualizer",
+    "No Task Selected"
+  ]
+}

@@ -1,0 +1,291 @@
+[
+  {
+    "entryId": "d17a9864-26a5-4917-82c6-93bf4d433ad9",
+    "contextId": "2eef58f3-32e7-4993-b330-1d05dd1719a4",
+    "sequenceNumber": 1,
+    "timestamp": "2025-08-10T18:53:06.707Z",
+    "actor": {
+      "type": "system",
+      "id": "google_oauth",
+      "version": "1.0.0"
+    },
+    "operation": "user_authenticated",
+    "data": {
+      "user": {
+        "firstName": "Gianmatteo",
+        "lastName": "Allyn",
+        "email": "gianmatteo.allyn.test@gmail.com",
+        "picture": "https://example.com/photo.jpg"
+      }
+    },
+    "reasoning": "User authenticated via Google OAuth. Extracted profile data from Google account.",
+    "trigger": {
+      "type": "user_action",
+      "action": "oauth_login"
+    }
+  },
+  {
+    "entryId": "9bbef047-aae9-48e6-9632-34fd70dda625",
+    "contextId": "2eef58f3-32e7-4993-b330-1d05dd1719a4",
+    "sequenceNumber": 2,
+    "timestamp": "2025-08-10T18:53:07.776Z",
+    "actor": {
+      "type": "agent",
+      "id": "data_collection",
+      "version": "1.0.0"
+    },
+    "operation": "ui_request_generated",
+    "data": {
+      "requests": [
+        {
+          "requestId": "6a326eed-53cf-415b-9fa2-3a6e352cb16d",
+          "metadata": {
+            "purpose": "Complete Business Information",
+            "urgency": "normal",
+            "category": "business_details",
+            "allowSkip": false
+          },
+          "dataNeeded": [
+            {
+              "field": "businessName",
+              "dataType": "string",
+              "semanticType": "business_name",
+              "required": true
+            },
+            {
+              "field": "entityType",
+              "dataType": "enum",
+              "semanticType": "entity_type",
+              "required": true,
+              "constraints": {
+                "options": [
+                  "LLC",
+                  "Corporation",
+                  "Sole Proprietorship",
+                  "Partnership"
+                ]
+              }
+            }
+          ],
+          "quickActions": [
+            {
+              "id": "import_quickbooks",
+              "label": "Import from QuickBooks",
+              "semanticAction": "import_business_data"
+            },
+            {
+              "id": "skip_ein",
+              "label": "I don't have an EIN yet",
+              "semanticAction": "skip_ein_collection"
+            }
+          ]
+        }
+      ]
+    },
+    "reasoning": "User profile collected. Now need business information. Using progressive disclosure to only ask for essential fields.",
+    "trigger": {
+      "type": "state_change",
+      "condition": "user_info_complete"
+    }
+  },
+  {
+    "entryId": "e9b8b594-166a-4b9f-9de0-ae57fc72b8ac",
+    "contextId": "2eef58f3-32e7-4993-b330-1d05dd1719a4",
+    "sequenceNumber": 3,
+    "timestamp": "2025-08-10T18:53:08.876Z",
+    "actor": {
+      "type": "user",
+      "id": "gianmatteo.allyn.test@gmail.com"
+    },
+    "operation": "user_data_provided",
+    "data": {
+      "business": {
+        "name": "SmallBizAlly Demo Corp",
+        "entityType": "LLC"
+      }
+    },
+    "reasoning": "User manually entered business information.",
+    "trigger": {
+      "type": "user_action",
+      "action": "form_submit"
+    }
+  },
+  {
+    "entryId": "a2a23e5d-d7da-4b52-a337-ddffc6125690",
+    "contextId": "2eef58f3-32e7-4993-b330-1d05dd1719a4",
+    "sequenceNumber": 4,
+    "timestamp": "2025-08-10T18:53:08.876Z",
+    "actor": {
+      "type": "agent",
+      "id": "legal_compliance",
+      "version": "1.0.0"
+    },
+    "operation": "compliance_check",
+    "data": {
+      "analysis": {
+        "entityType": "LLC",
+        "requirements": {
+          "ein": true,
+          "stateRegistration": true,
+          "operatingAgreement": false
+        },
+        "recommendation": "LLC requires EIN for tax purposes. Should check if already registered with CA SOS."
+      }
+    },
+    "reasoning": "LLM analyzed entity type \"LLC\" and determined compliance requirements. Used GPT-4 to understand that LLCs in California need EIN and state registration. Decision based on regulatory knowledge.",
+    "trigger": {
+      "type": "data_change",
+      "field": "business.entityType"
+    }
+  },
+  {
+    "entryId": "519fbfa3-d123-4dfe-9554-593aa4d7edce",
+    "contextId": "2eef58f3-32e7-4993-b330-1d05dd1719a4",
+    "sequenceNumber": 5,
+    "timestamp": "2025-08-10T18:53:09.956Z",
+    "actor": {
+      "type": "agent",
+      "id": "public_records",
+      "version": "1.0.0"
+    },
+    "operation": "public_records_found",
+    "data": {
+      "caRegistration": {
+        "found": true,
+        "entityNumber": "LLC-123456",
+        "status": "Active",
+        "filingDate": "2023-01-15",
+        "registeredAgent": "John Doe",
+        "address": "123 Main St, San Francisco, CA 94102"
+      }
+    },
+    "reasoning": "Searched CA Secretary of State database for \"SmallBizAlly Demo Corp\". Found active LLC registration. Data can pre-fill SOI form.",
+    "trigger": {
+      "type": "agent_request",
+      "from": "legal_compliance"
+    }
+  },
+  {
+    "entryId": "2f6d966b-5bb1-44db-aeb1-334a62195a1e",
+    "contextId": "2eef58f3-32e7-4993-b330-1d05dd1719a4",
+    "sequenceNumber": 6,
+    "timestamp": "2025-08-10T18:53:11.029Z",
+    "actor": {
+      "type": "agent",
+      "id": "data_collection",
+      "version": "1.0.0"
+    },
+    "operation": "ui_request_generated",
+    "data": {
+      "requests": [
+        {
+          "requestId": "2363f556-c60d-4b5f-8953-87a6529e908d",
+          "metadata": {
+            "purpose": "Federal Tax ID Required",
+            "urgency": "high",
+            "category": "tax_compliance",
+            "allowSkip": true,
+            "skipConsequence": "You can add this later, but some features will be limited."
+          },
+          "dataNeeded": [
+            {
+              "field": "ein",
+              "dataType": "string",
+              "semanticType": "ein",
+              "required": false,
+              "constraints": {
+                "pattern": "^[0-9]{2}-[0-9]{7}$"
+              }
+            }
+          ],
+          "quickActions": [
+            {
+              "id": "apply_ein",
+              "label": "Apply for EIN Now",
+              "semanticAction": "navigate_irs_ein_application"
+            },
+            {
+              "id": "import_quickbooks",
+              "label": "Import from QuickBooks",
+              "semanticAction": "import_ein_from_accounting"
+            },
+            {
+              "id": "skip_ein",
+              "label": "Skip for Now",
+              "semanticAction": "defer_ein_collection"
+            },
+            {
+              "id": "help_ein",
+              "label": "What's an EIN?",
+              "semanticAction": "show_help_ein"
+            }
+          ]
+        }
+      ]
+    },
+    "reasoning": "LLC requires EIN. Providing multiple options via ActionPills for progressive disclosure. User can skip if needed.",
+    "trigger": {
+      "type": "compliance_requirement",
+      "requirement": "ein"
+    }
+  },
+  {
+    "entryId": "10622db0-2a75-472b-b0fe-5337b3eaf3fb",
+    "contextId": "2eef58f3-32e7-4993-b330-1d05dd1719a4",
+    "sequenceNumber": 7,
+    "timestamp": "2025-08-10T18:53:12.097Z",
+    "actor": {
+      "type": "user",
+      "id": "gianmatteo.allyn.test@gmail.com"
+    },
+    "operation": "user_data_provided",
+    "data": {
+      "business": {
+        "ein": "12-3456789"
+      }
+    },
+    "reasoning": "User provided EIN manually.",
+    "trigger": {
+      "type": "user_action",
+      "action": "form_submit"
+    }
+  },
+  {
+    "entryId": "1b8b09af-c7d3-4b75-a0ac-777aaa5efdc8",
+    "contextId": "2eef58f3-32e7-4993-b330-1d05dd1719a4",
+    "sequenceNumber": 8,
+    "timestamp": "2025-08-10T18:53:12.097Z",
+    "actor": {
+      "type": "agent",
+      "id": "orchestrator",
+      "version": "1.0.0"
+    },
+    "operation": "task_completed",
+    "data": {
+      "summary": {
+        "goalsAchieved": [
+          "create_user_profile",
+          "collect_business_info",
+          "verify_entity"
+        ],
+        "dataCollected": {
+          "user": true,
+          "business": true,
+          "ein": true,
+          "caRegistration": true
+        },
+        "nextSteps": [
+          "Generate SOI pre-fill",
+          "Schedule compliance reminders"
+        ]
+      }
+    },
+    "reasoning": "All required data collected. User onboarding complete. Ready for compliance workflows.",
+    "trigger": {
+      "type": "goal_completion",
+      "goals": [
+        "all_required"
+      ]
+    }
+  }
+]

@@ -1,0 +1,31 @@
+{
+  "onboarding": {
+    "success": true,
+    "details": {}
+  },
+  "devToolkit": {
+    "success": true,
+    "details": {
+      "logCount": 6,
+      "hasBusinessDiscovery": true,
+      "hasUserGuidance": true,
+      "hasArcanaDwell": true
+    }
+  },
+  "groundTruths": {
+    "success": true,
+    "details": {
+      "hasArcanaDwell": true,
+      "hasOldMockData": false,
+      "hasAPIMessage": true,
+      "hasUserGuidance": true,
+      "businessFound": true
+    }
+  },
+  "screenshots": [
+    "arcana-final-1754955778485/01-initial-load.png",
+    "arcana-final-1754955778485/02-after-get-started.png",
+    "arcana-final-1754955778485/03-business-selected.png",
+    "arcana-final-1754955778485/04-final-state.png"
+  ]
+}
