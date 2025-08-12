@@ -35,7 +35,12 @@
     "test:onboarding": "playwright test tests/e2e/onboarding-flow.spec.ts --config playwright.config.no-auth.ts --reporter=list",
     "test:onboarding:debug": "playwright test tests/e2e/onboarding-flow.spec.ts --config playwright.config.no-auth.ts --debug",
     "cleanup:dry-run": "CLEANUP_DRY_RUN=true ts-node scripts/cleanup-test-users.ts",
-    "cleanup:test-users": "ENVIRONMENT=test ts-node scripts/cleanup-test-users.ts"
+    "cleanup:test-users": "ENVIRONMENT=test ts-node scripts/cleanup-test-users.ts",
+    "test:arcana": "node test-arcana-dwell-user-story.js",
+    "test:arcana:playwright": "node test-arcana-dwell-user-story.js",
+    "test:arcana:puppeteer": "node test-arcana-dwell-user-story.js --puppeteer",
+    "test:suite": "node test-suite.js",
+    "test:all": "npm run test:suite"
   },
   "keywords": [
     "e2e",
@@ -57,6 +62,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.54.0",
+    "node-fetch": "^3.3.2",
     "puppeteer": "^24.16.0"
   }
 }
