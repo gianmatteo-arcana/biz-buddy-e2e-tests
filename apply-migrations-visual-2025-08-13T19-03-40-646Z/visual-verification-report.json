@@ -1,0 +1,108 @@
+{
+  "testRunId": "apply-migrations-visual-2025-08-13T19-03-40-646Z",
+  "timestamp": "2025-08-13T19:05:03.784Z",
+  "screenshots": [
+    {
+      "filename": "01-dev-toolkit-initial.png",
+      "description": "Dev Toolkit loaded"
+    },
+    {
+      "filename": "02-migrations-tab.png",
+      "description": "Migrations tab opened"
+    },
+    {
+      "filename": "03-migrations-selected.png",
+      "description": "After selection attempt"
+    },
+    {
+      "filename": "04-before-apply.png",
+      "description": "Before clicking Apply"
+    },
+    {
+      "filename": "05-after-apply.png",
+      "description": "After clicking Apply"
+    },
+    {
+      "filename": "06-debug-info.png",
+      "description": "Debug information"
+    },
+    {
+      "filename": "07-final-state.png",
+      "description": "Final state after refresh"
+    }
+  ],
+  "visualAnalysis": [
+    {
+      "name": "initial-load",
+      "timestamp": "2025-08-13T19:03:46.878Z",
+      "pendingCount": null,
+      "appliedCount": null,
+      "errorMessages": [],
+      "successMessages": [],
+      "visibleMigrations": [],
+      "applyButtonState": null
+    },
+    {
+      "name": "before-action",
+      "timestamp": "2025-08-13T19:04:49.513Z",
+      "pendingCount": 2,
+      "appliedCount": 59,
+      "errorMessages": [],
+      "successMessages": [],
+      "visibleMigrations": [
+        "20250813010809_demo_comment_update.sql",
+        "20250813_000000_initial_schema.sql"
+      ],
+      "applyButtonState": {
+        "visible": true,
+        "enabled": true,
+        "text": "Apply Selected (2)"
+      }
+    },
+    {
+      "name": "after-apply",
+      "timestamp": "2025-08-13T19:04:56.940Z",
+      "pendingCount": 2,
+      "appliedCount": 59,
+      "errorMessages": [
+        "Migration Failed",
+        "Failed: Edge Function returned a non-2xx status code",
+        "Error:"
+      ],
+      "successMessages": [],
+      "visibleMigrations": [
+        "20250813010809_demo_comment_update.sql",
+        "20250813_000000_initial_schema.sql"
+      ],
+      "applyButtonState": {
+        "visible": true,
+        "enabled": true,
+        "text": "Apply Selected (2)"
+      }
+    },
+    {
+      "name": "final-state",
+      "timestamp": "2025-08-13T19:05:03.773Z",
+      "pendingCount": 2,
+      "appliedCount": 59,
+      "errorMessages": [],
+      "successMessages": [],
+      "visibleMigrations": [
+        "20250813010809_demo_comment_update.sql",
+        "20250813_000000_initial_schema.sql"
+      ],
+      "applyButtonState": {
+        "visible": true,
+        "enabled": true,
+        "text": "Apply Selected (2)"
+      }
+    }
+  ],
+  "summary": {
+    "initialPendingCount": 2,
+    "finalPendingCount": 2,
+    "migrationsApplied": 0,
+    "success": false,
+    "errors": []
+  }
+}

@@ -4,8 +4,21 @@ const path = require('path');
 
 /**
  * Autonomous test runner that captures detailed diagnostics
+ * Now includes build verification before running tests!
  */
 async function runAutonomousTest() {
+  // CRITICAL: Verify builds before testing
+  console.log('🔍 Pre-flight Build Verification\n');
+  try {
+    const { verifyBuilds } = require('./verify-build-before-test');
+    await verifyBuilds();
+    console.log('Build verification passed, proceeding with E2E tests...\n');
+  } catch (error) {
+    console.error('❌ Build verification failed!');
+    console.error('E2E tests cannot run with build errors.');
+    console.error('Fix the issues above and try again.\n');
+    process.exit(1);
+  }
   const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
   const testDir = `test-run-${timestamp}`;
   
