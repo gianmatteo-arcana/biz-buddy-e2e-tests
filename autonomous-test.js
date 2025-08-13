@@ -225,7 +225,7 @@ async function runAutonomousTest() {
     console.log(`\n✨ Test complete! Results in: ${testDir}/`);
     
   } catch (_error) {
-    console.error('❌ Test failed:', error);
+    console.error('❌ Test failed:', _error);
     await page.screenshot({ path: path.join(testDir, 'error-screenshot.png') });
   } finally {
     await browser.close();
