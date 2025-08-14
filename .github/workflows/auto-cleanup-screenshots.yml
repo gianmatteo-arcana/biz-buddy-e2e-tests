@@ -1,0 +1,97 @@
+name: Auto Cleanup Screenshots
+
+on:
+  schedule:
+    # Run daily at 2 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (show what would be deleted without deleting)'
+        required: false
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Need full history to check file ages
+          
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          
+      - name: Clean up old screenshots
+        run: |
+          echo "🧹 Auto-cleanup: Removing screenshots older than 10 days"
+          
+          # Calculate cutoff date (10 days ago)
+          CUTOFF_DATE=$(date -d '10 days ago' '+%Y-%m-%d')
+          echo "Cutoff date: $CUTOFF_DATE"
+          
+          # Find PNG/JPG files older than 10 days
+          OLD_FILES=$(find . -name "*.png" -o -name "*.jpg" | while read file; do
+            # Get the commit date of the file
+            COMMIT_DATE=$(git log -1 --format="%ci" --follow -- "$file" 2>/dev/null | cut -d' ' -f1)
+            
+            if [ ! -z "$COMMIT_DATE" ] && [ "$COMMIT_DATE" \< "$CUTOFF_DATE" ]; then
+              echo "$file (committed: $COMMIT_DATE)"
+            fi
+          done)
+          
+          if [ -z "$OLD_FILES" ]; then
+            echo "✅ No old screenshots found to delete"
+            exit 0
+          fi
+          
+          echo "📋 Files to be removed:"
+          echo "$OLD_FILES"
+          
+          # Count files
+          FILE_COUNT=$(echo "$OLD_FILES" | wc -l)
+          echo "Total files: $FILE_COUNT"
+          
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            echo "🔍 DRY RUN: Would delete $FILE_COUNT files (no actual deletion)"
+            exit 0
+          fi
+          
+          # Delete the files
+          echo "$OLD_FILES" | while read file; do
+            if [ ! -z "$file" ]; then
+              echo "Deleting: $file"
+              rm -f "$file"
+            fi
+          done
+          
+          # Commit the cleanup
+          git config --local user.email "action@github.com"
+          git config --local user.name "Auto Cleanup Bot"
+          
+          if [ -n "$(git status --porcelain)" ]; then
+            git add -A
+            git commit -m "🧹 Auto-cleanup: Remove screenshots older than 10 days
+
+            Removed $FILE_COUNT screenshot files to prevent repository bloat.
+            Files older than $CUTOFF_DATE have been automatically pruned.
+            
+            This is an automated cleanup to maintain repository health."
+            git push
+            echo "✅ Cleanup committed and pushed"
+          else
+            echo "✅ No changes to commit"
+          fi
+          
+      - name: Summary
+        run: |
+          echo "🎯 Auto-cleanup completed successfully"
+          echo "Repository size maintained by removing old test screenshots"
+          echo "Only recent test evidence (last 10 days) is retained"

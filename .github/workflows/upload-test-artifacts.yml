@@ -1,10 +1,10 @@
-name: Upload Test Artifacts
+name: Upload Test Screenshots
 
 on:
   workflow_dispatch:
     inputs:
       issue_number:
-        description: 'Issue number to link artifacts to'
+        description: 'Issue number to link screenshots to'
         required: true
         type: number
       test_name:
@@ -13,50 +13,111 @@ on:
         type: string
 
 permissions:
-  contents: read
+  contents: write
   issues: write
   pull-requests: write
 
 jobs:
-  upload-artifacts:
+  upload-screenshots:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: List available screenshots
+      - name: Find and organize screenshots
         run: |
-          echo "Looking for test screenshots..."
-          find . -name "*.png" -o -name "*.jpg" | head -20
+          echo "📸 Finding test screenshots..."
           
-      - name: Upload Test Screenshots
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-screenshots-issue-${{ github.event.inputs.issue_number }}
-          path: |
-            **/*.png
-            **/*.jpg
-            !node_modules/**
-          retention-days: 30
-          if-no-files-found: warn
+          # Create timestamp-based directory for this upload
+          TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+          UPLOAD_DIR="uploaded-screenshots/issue-${{ github.event.inputs.issue_number }}/$TIMESTAMP"
+          mkdir -p "$UPLOAD_DIR"
           
-      - name: Comment on Issue with Artifact Link
+          # Find the most recent test screenshots (migration test directory)
+          LATEST_TEST_DIR=$(find . -name "migration-*" -type d | sort -r | head -1)
+          
+          if [ ! -z "$LATEST_TEST_DIR" ] && [ -d "$LATEST_TEST_DIR" ]; then
+            echo "📁 Found latest test directory: $LATEST_TEST_DIR"
+            cp "$LATEST_TEST_DIR"/*.png "$UPLOAD_DIR/" 2>/dev/null || echo "No PNG files in test directory"
+            cp "$LATEST_TEST_DIR"/*.jpg "$UPLOAD_DIR/" 2>/dev/null || echo "No JPG files in test directory"
+          fi
+          
+          # Also copy any standalone screenshots from recent tests
+          find . -maxdepth 1 -name "*.png" -newer /tmp/recent 2>/dev/null | head -5 | while read file; do
+            cp "$file" "$UPLOAD_DIR/" 2>/dev/null || true
+          done
+          
+          echo "📋 Files to upload:"
+          ls -la "$UPLOAD_DIR/" || echo "No files found"
+          
+          echo "UPLOAD_DIR=$UPLOAD_DIR" >> $GITHUB_ENV
+          
+      - name: Commit screenshots to repository
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "Screenshot Upload Bot"
+          
+          if [ -d "$UPLOAD_DIR" ] && [ "$(ls -A $UPLOAD_DIR)" ]; then
+            git add "$UPLOAD_DIR"
+            git commit -m "📸 Upload screenshots for issue #${{ github.event.inputs.issue_number }}
+
+            Test: ${{ github.event.inputs.test_name }}
+            Uploaded: $(ls $UPLOAD_DIR | wc -l) files
+            Auto-cleanup: Files will be pruned after 10 days"
+            git push
+            echo "✅ Screenshots committed to repository"
+          else
+            echo "⚠️ No screenshots found to upload"
+            exit 1
+          fi
+          
+      - name: Post issue comment with embedded screenshots
         uses: actions/github-script@v7
         with:
           script: |
+            const fs = require('fs');
+            const path = require('path');
+            
             const issueNumber = ${{ github.event.inputs.issue_number }};
-            const runId = context.runId;
-            const artifactUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${runId}`;
+            const uploadDir = process.env.UPLOAD_DIR;
+            const owner = context.repo.owner;
+            const repo = 'biz-buddy-ally-now';  // Target main app repo
+            
+            // Get list of uploaded files
+            let screenshotMarkdown = '';
+            
+            try {
+              const files = fs.readdirSync(uploadDir);
+              const imageFiles = files.filter(f => f.endsWith('.png') || f.endsWith('.jpg'));
+              
+              if (imageFiles.length > 0) {
+                screenshotMarkdown = imageFiles.map(file => {
+                  const rawUrl = `https://raw.githubusercontent.com/${context.repo.owner}/${context.repo.repo}/main/${uploadDir}/${file}`;
+                  return `### 📸 ${file}\n![${file}](${rawUrl})\n`;
+                }).join('\n');
+              }
+            } catch (error) {
+              console.log('Could not read screenshot files:', error.message);
+              screenshotMarkdown = '⚠️ Screenshots were uploaded but could not be embedded. Check the repository for files.';
+            }
+            
+            const commentBody = `## 📸 Test Screenshots Uploaded
+            
+            **Test Name**: ${{ github.event.inputs.test_name }}
+            **Uploaded**: ${new Date().toISOString()}
+            
+            ${screenshotMarkdown}
+            
+            ---
+            📁 **Repository Path**: \`${uploadDir}\`
+            🧹 **Auto-cleanup**: Screenshots older than 10 days are automatically removed
+            ✅ **Immediate Access**: Screenshots are embedded above for instant viewing`;
             
             await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: 'biz-buddy-ally-now',  // Target main app repo for issues
+              owner: owner,
+              repo: repo,
               issue_number: issueNumber,
-              body: `## 📸 Test Screenshots Available
-              
-              Test Name: **${{ github.event.inputs.test_name }}**
-              
-              [View Test Artifacts](${artifactUrl}) - Screenshots are available in the Artifacts section
-              
-              ✅ These artifacts will automatically expire in 30 days to keep the repository clean.`
+              body: commentBody
             });
+            
+            console.log('✅ Issue comment posted with embedded screenshots');
