@@ -33,7 +33,14 @@ jobs:
           UPLOAD_DIR="uploaded-screenshots/issue-${{ github.event.inputs.issue_number }}/$TIMESTAMP"
           mkdir -p "$UPLOAD_DIR"
           
-          # Look for screenshots in test-artifacts directory for this issue first
+          # Look for screenshots in demo-screenshots directory for this issue first
+          if [ -d "demo-screenshots/issue-${{ github.event.inputs.issue_number }}" ]; then
+            echo "📁 Found demo-screenshots directory for issue #${{ github.event.inputs.issue_number }}"
+            cp "demo-screenshots/issue-${{ github.event.inputs.issue_number }}"/*.png "$UPLOAD_DIR/" 2>/dev/null || echo "No PNG files in demo-screenshots"
+            cp "demo-screenshots/issue-${{ github.event.inputs.issue_number }}"/*.jpg "$UPLOAD_DIR/" 2>/dev/null || echo "No JPG files in demo-screenshots"
+          fi
+          
+          # Look for screenshots in test-artifacts directory for this issue  
           if [ -d "test-artifacts/issue-${{ github.event.inputs.issue_number }}" ]; then
             echo "📁 Found test-artifacts directory for issue #${{ github.event.inputs.issue_number }}"
             cp "test-artifacts/issue-${{ github.event.inputs.issue_number }}"/*.png "$UPLOAD_DIR/" 2>/dev/null || echo "No PNG files in test-artifacts"

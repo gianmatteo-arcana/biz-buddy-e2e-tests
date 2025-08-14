@@ -51,6 +51,10 @@ autonomous-test-results/
 *.png
 *.jpg
 *.jpeg
+
+# Exception: Allow demo screenshots for workflow testing
+!demo-screenshots/**/*.png
+!demo-screenshots/**/*.jpg
 browser-console.log
 console.log
 network.log
