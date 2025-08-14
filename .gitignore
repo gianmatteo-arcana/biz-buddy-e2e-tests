@@ -55,6 +55,10 @@ autonomous-test-results/
 # Exception: Allow demo screenshots for workflow testing
 !demo-screenshots/**/*.png
 !demo-screenshots/**/*.jpg
+
+# Exception: Allow uploaded screenshots from GitHub Actions
+!uploaded-screenshots/**/*.png
+!uploaded-screenshots/**/*.jpg
 browser-console.log
 console.log
 network.log
