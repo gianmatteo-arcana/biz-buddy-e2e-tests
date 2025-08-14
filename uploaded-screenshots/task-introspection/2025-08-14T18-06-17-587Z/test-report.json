@@ -1,0 +1,18 @@
+{
+  "timestamp": "2025-08-14T18:06:17.678Z",
+  "testName": "Task Introspection Enhancement",
+  "environment": "Authenticated",
+  "results": {
+    "introspectionTabExists": false,
+    "taskSelectorExists": false,
+    "components": {
+      "Task Selector": false,
+      "Refresh Button": true,
+      "Agent Timeline Card": false,
+      "Context Details Card": false,
+      "Flow Analysis Card": false
+    },
+    "overallStatus": "PARTIAL"
+  },
+  "screenshotPath": "uploaded-screenshots/task-introspection/2025-08-14T18-06-17-587Z/introspection-test.png"
+}
