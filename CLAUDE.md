@@ -295,3 +295,88 @@ gh workflow run "Upload Test Screenshots" \
 4. ✅ **VERIFY** screenshots display properly in the target issue
 
 **This system is PROVEN WORKING and should be the standard for all E2E visual documentation.**
+
+## 🚫 CRITICAL: PREVENTING SCREENSHOT UPLOAD FAILURES
+
+### **COMMON BACKSLIDING PATTERNS TO AVOID**
+
+**AI Assistants frequently forget and use broken patterns. DO NOT:**
+
+### ❌ **The Placeholder URL Trap** (Most Common Failure)
+```markdown
+# AI FREQUENTLY DOES THIS WRONG:
+![Screenshot](https://github.com/user/repo/assets/placeholder/image.png)
+# Result: 404 - Screenshots don't exist
+```
+
+### ❌ **The Attachment Illusion** 
+```markdown
+# AI PRETENDS to attach but doesn't:
+![Screenshot](attachment://screenshot.png)
+# Result: No actual attachment
+```
+
+### ❌ **The Local Path Delusion**
+```markdown
+# AI uses local paths that GitHub can't access:
+![Screenshot](/Users/gianmatteo/test-results/screenshot.png)
+# Result: Broken image
+```
+
+### ✅ **THE ONLY CORRECT PATTERN**
+
+**MEMORIZE THIS SEQUENCE:**
+
+```bash
+# Step 1: ALWAYS create the directory in e2e-tests repo
+cd /Users/gianmatteo/Documents/Arcana-Prototype-2/biz-buddy-e2e-tests
+mkdir -p uploaded-screenshots/issue-{NUMBER}
+
+# Step 2: ALWAYS copy screenshots to that directory
+cp {test-results-dir}/*.png uploaded-screenshots/issue-{NUMBER}/
+
+# Step 3: ALWAYS commit and push to GitHub
+git add uploaded-screenshots/issue-{NUMBER}/
+git commit -m "feat: Add screenshots for issue #{NUMBER}"
+git push origin main
+
+# Step 4: ALWAYS use raw.githubusercontent.com URLs
+# Format: https://raw.githubusercontent.com/gianmatteo-arcana/biz-buddy-e2e-tests/main/uploaded-screenshots/issue-{NUMBER}/{filename}.png
+```
+
+### 🔴 **VALIDATION BEFORE POSTING**
+
+**NEVER post to an issue without:**
+```bash
+# Verify the URL works (MUST return 200)
+curl -I https://raw.githubusercontent.com/gianmatteo-arcana/biz-buddy-e2e-tests/main/uploaded-screenshots/issue-{NUMBER}/screenshot.png
+```
+
+### 📝 **SCREENSHOT POSTING TEMPLATE**
+
+**Copy this template when updating issues:**
+```markdown
+## 📸 Screenshots for Issue #{NUMBER}
+
+### {Feature/Test Name}
+![{Description}](https://raw.githubusercontent.com/gianmatteo-arcana/biz-buddy-e2e-tests/main/uploaded-screenshots/issue-{NUMBER}/{filename}.png)
+*✅ {What this screenshot proves}*
+```
+
+### 🧠 **MEMORY REINFORCEMENT**
+
+**Before EVERY issue update with screenshots, ask yourself:**
+1. Did I upload to `biz-buddy-e2e-tests/uploaded-screenshots/issue-{NUMBER}/`?
+2. Did I push to GitHub?
+3. Am I using `raw.githubusercontent.com` URLs?
+4. Did I verify the URLs return HTTP 200?
+
+**If ANY answer is NO, STOP and fix it!**
+
+### 🚨 **AUTOMATIC FAILURE CONDITIONS**
+- Using placeholder URLs = FAILURE
+- Screenshots returning 404 = FAILURE  
+- Not pushing to GitHub first = FAILURE
+- Using wrong repository = FAILURE
+
+**Remember: Screenshots must be VISIBLE in the issue or the work is INCOMPLETE!**
