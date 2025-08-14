@@ -97,7 +97,7 @@ jobs:
             const owner = context.repo.owner;
             const repo = 'biz-buddy-ally-now';  // Target main app repo
             
-            // Get list of uploaded files
+            // Get list of uploaded files and convert to base64
             let screenshotMarkdown = '';
             
             try {
@@ -106,8 +106,18 @@ jobs:
               
               if (imageFiles.length > 0) {
                 screenshotMarkdown = imageFiles.map(file => {
-                  const rawUrl = `https://raw.githubusercontent.com/${context.repo.owner}/${context.repo.repo}/main/${uploadDir}/${file}`;
-                  return `### 📸 ${file}\n![${file}](${rawUrl})\n`;
+                  try {
+                    const filePath = path.join(uploadDir, file);
+                    const imageBuffer = fs.readFileSync(filePath);
+                    const base64Image = imageBuffer.toString('base64');
+                    const mimeType = file.endsWith('.png') ? 'image/png' : 'image/jpeg';
+                    const dataUrl = `data:${mimeType};base64,${base64Image}`;
+                    
+                    return `### 📸 ${file}\n![${file}](${dataUrl})\n`;
+                  } catch (err) {
+                    console.log(`Error processing ${file}:`, err.message);
+                    return `### 📸 ${file}\n⚠️ Error loading image: ${file}\n`;
+                  }
                 }).join('\n');
               }
             } catch (error) {
@@ -134,4 +144,4 @@ jobs:
               body: commentBody
             });
             
-            console.log('✅ Issue comment posted with embedded screenshots');
+            console.log('✅ Issue comment posted with base64 embedded screenshots');
