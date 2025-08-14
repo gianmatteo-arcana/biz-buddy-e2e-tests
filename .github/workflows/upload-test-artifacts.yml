@@ -97,7 +97,7 @@ jobs:
             const owner = context.repo.owner;
             const repo = 'biz-buddy-ally-now';  // Target main app repo
             
-            // Get list of uploaded files and convert to base64
+            // Get list of uploaded files and create raw GitHub URLs
             let screenshotMarkdown = '';
             
             try {
@@ -105,19 +105,13 @@ jobs:
               const imageFiles = files.filter(f => f.endsWith('.png') || f.endsWith('.jpg'));
               
               if (imageFiles.length > 0) {
+                // Wait a moment for files to be fully committed and available
+                await new Promise(resolve => setTimeout(resolve, 5000));
+                
                 screenshotMarkdown = imageFiles.map(file => {
-                  try {
-                    const filePath = path.join(uploadDir, file);
-                    const imageBuffer = fs.readFileSync(filePath);
-                    const base64Image = imageBuffer.toString('base64');
-                    const mimeType = file.endsWith('.png') ? 'image/png' : 'image/jpeg';
-                    const dataUrl = `data:${mimeType};base64,${base64Image}`;
-                    
-                    return `### 📸 ${file}\n![${file}](${dataUrl})\n`;
-                  } catch (err) {
-                    console.log(`Error processing ${file}:`, err.message);
-                    return `### 📸 ${file}\n⚠️ Error loading image: ${file}\n`;
-                  }
+                  // Use raw.githubusercontent.com URL pointing to the E2E repo where files are stored
+                  const rawUrl = `https://raw.githubusercontent.com/${context.repo.owner}/${context.repo.repo}/main/${uploadDir}/${file}`;
+                  return `### 📸 ${file}\n![${file}](${rawUrl})\n`;
                 }).join('\n');
               }
             } catch (error) {
@@ -135,7 +129,9 @@ jobs:
             ---
             📁 **Repository Path**: \`${uploadDir}\`
             🧹 **Auto-cleanup**: Screenshots older than 10 days are automatically removed
-            ✅ **Immediate Access**: Screenshots are embedded above for instant viewing`;
+            ✅ **Immediate Access**: Screenshots are embedded above for instant viewing
+            
+            🔗 **Raw URLs**: Files served from \`${context.repo.owner}/${context.repo.repo}\` repository`;
             
             await github.rest.issues.createComment({
               owner: owner,
@@ -144,4 +140,4 @@ jobs:
               body: commentBody
             });
             
-            console.log('✅ Issue comment posted with base64 embedded screenshots');
+            console.log('✅ Issue comment posted with raw GitHub URLs');
