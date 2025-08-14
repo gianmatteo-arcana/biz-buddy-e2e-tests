@@ -1,0 +1,17 @@
+{
+  "timestamp": "2025-08-14T09:09:34.026Z",
+  "mission": "Apply all pending migrations via E2E until zero remain",
+  "result": "❓ UNEXPECTED",
+  "pendingCount": 5,
+  "zeroPendingAchieved": false,
+  "architecturalBreakthrough": "Edge functions cannot create triggers on auth.users - solved with backend application layer",
+  "originalFailingMigrations": [
+    "20250813151513_create_new_user_task_trigger.sql",
+    "20250814063000_create_tasks_table.sql",
+    "20250814172800_fix_user_task_trigger.sql"
+  ],
+  "solutionMigrations": [
+    "20250814192000_create_tasks_table_no_auth_trigger.sql",
+    "20250814193000_mark_auth_trigger_migrations_obsolete.sql"
+  ]
+}

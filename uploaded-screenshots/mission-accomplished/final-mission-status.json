@@ -1,0 +1,8 @@
+{
+  "authenticated": true,
+  "pendingCount": 3,
+  "appliedCount": 63,
+  "timestamp": "2025-08-14T08-50-16",
+  "missionAccomplished": false,
+  "note": "Migrations exist but may require manual intervention or have dependency issues"
+}
