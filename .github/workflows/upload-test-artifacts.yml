@@ -33,6 +33,13 @@ jobs:
           UPLOAD_DIR="uploaded-screenshots/issue-${{ github.event.inputs.issue_number }}/$TIMESTAMP"
           mkdir -p "$UPLOAD_DIR"
           
+          # Look for screenshots in test-artifacts directory for this issue first
+          if [ -d "test-artifacts/issue-${{ github.event.inputs.issue_number }}" ]; then
+            echo "📁 Found test-artifacts directory for issue #${{ github.event.inputs.issue_number }}"
+            cp "test-artifacts/issue-${{ github.event.inputs.issue_number }}"/*.png "$UPLOAD_DIR/" 2>/dev/null || echo "No PNG files in test-artifacts"
+            cp "test-artifacts/issue-${{ github.event.inputs.issue_number }}"/*.jpg "$UPLOAD_DIR/" 2>/dev/null || echo "No JPG files in test-artifacts"
+          fi
+          
           # Find the most recent test screenshots (migration test directory)
           LATEST_TEST_DIR=$(find . -name "migration-*" -type d | sort -r | head -1)
           
