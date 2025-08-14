@@ -1,0 +1,123 @@
+name: Issue & PR Automation - E2E Tests
+
+on:
+  pull_request:
+    types: [opened, closed]
+  issues:
+    types: [opened, labeled]
+
+jobs:
+  auto-issue-management:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Extract Issue Numbers from PR
+        if: github.event.pull_request.merged == true
+        id: extract-issues
+        run: |
+          # Extract issue numbers from PR body using regex
+          ISSUES=$(echo "${{ github.event.pull_request.body }}" | grep -oE "(closes|fixes|resolves) #[0-9]+" | grep -oE "#[0-9]+" | tr '\n' ' ')
+          echo "issues=$ISSUES" >> $GITHUB_OUTPUT
+          
+      - name: Update Linked Issues on PR Merge
+        if: github.event.pull_request.merged == true && steps.extract-issues.outputs.issues != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          for issue in ${{ steps.extract-issues.outputs.issues }}; do
+            issue_num=${issue#\#}
+            
+            # Add comprehensive resolution comment
+            gh issue comment $issue_num --body "## ✅ RESOLVED in E2E Tests PR #${{ github.event.pull_request.number }}
+
+            **E2E Test changes** automatically resolved when PR #${{ github.event.pull_request.number }} was merged.
+            
+            ### 📋 E2E Resolution Details
+            - **PR Title**: ${{ github.event.pull_request.title }}
+            - **Merged At**: $(date -u +"%Y-%m-%d %H:%M:%S UTC")
+            - **Merged By**: @${{ github.event.pull_request.merged_by.login }}
+            - **Branch**: \`${{ github.event.pull_request.head.ref }}\`
+            - **Repository**: E2E Tests (Playwright/Autonomous)
+            
+            ### 🔍 E2E Changes Summary
+            ${{ github.event.pull_request.body }}
+            
+            ### 🎯 E2E Status
+            E2E test issue automatically resolved and closed. ✨
+            
+            **Note**: Run \`node autonomous-test.js\` to verify the resolved functionality end-to-end."
+            
+            echo "Updated issue #$issue_num with E2E resolution details"
+          done
+
+      - name: Auto-Label E2E Issues
+        if: github.event_name == 'issues' && github.event.action == 'opened'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TITLE_LOWER=$(echo "${{ github.event.issue.title }}" | tr '[:upper:]' '[:lower:]')
+          BODY_LOWER=$(echo "${{ github.event.issue.body }}" | tr '[:upper:]' '[:lower:]')
+          
+          # Auto-label based on E2E-specific keywords
+          if echo "$TITLE_LOWER $BODY_LOWER" | grep -qE "(playwright|automation|e2e|end.to.end|test.failed)"; then
+            gh issue edit ${{ github.event.issue.number }} --add-label "e2e,testing"
+          fi
+          
+          if echo "$TITLE_LOWER $BODY_LOWER" | grep -qE "(auth|login|oauth|authentication|session)"; then
+            gh issue edit ${{ github.event.issue.number }} --add-label "authentication,e2e"
+          fi
+          
+          if echo "$TITLE_LOWER $BODY_LOWER" | grep -qE "(screenshot|visual|ui|element|selector)"; then
+            gh issue edit ${{ github.event.issue.number }} --add-label "ui,visual,e2e"
+          fi
+          
+          if echo "$TITLE_LOWER $BODY_LOWER" | grep -qE "(timeout|hanging|slow|performance)"; then
+            gh issue edit ${{ github.event.issue.number }} --add-label "performance,e2e"
+          fi
+          
+          if echo "$TITLE_LOWER $BODY_LOWER" | grep -qE "(flaky|unstable|intermittent|random)"; then
+            gh issue edit ${{ github.event.issue.number }} --add-label "flaky,e2e"
+          fi
+
+      - name: Create E2E Test Run Tasks
+        if: github.event.pull_request.merged == true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Check if this was an E2E test change requiring verification
+          if git diff --name-only HEAD~1 HEAD | grep -qE "(\\.js|\\.ts|package\\.json|playwright\\.config)"; then
+            gh issue create \
+              --title "🧪 VERIFICATION: Run E2E tests after PR #${{ github.event.pull_request.number }}" \
+              --body "## E2E Test Verification Required
+
+              PR #${{ github.event.pull_request.number }} included E2E test changes that need verification.
+              
+              ### 📋 Next Steps
+              - [ ] Run autonomous E2E tests: \`node autonomous-test.js\`
+              - [ ] Verify all test scenarios pass successfully
+              - [ ] Check for any new flaky tests or timing issues
+              - [ ] Validate screenshots and visual elements
+              - [ ] Confirm authentication flows work properly
+              
+              ### 🔗 Related
+              - Original E2E PR: #${{ github.event.pull_request.number }}
+              - Changed files: $(git diff --name-only HEAD~1 HEAD | head -5 | tr '\n' ', ')
+              
+              ### 🎯 E2E Verification Checklist
+              - [ ] Autonomous test run: ✅ / ❌
+              - [ ] Authentication flow: ✅ / ❌
+              - [ ] UI element validation: ✅ / ❌  
+              - [ ] Screenshot comparison: ✅ / ❌
+              - [ ] Performance checks: ✅ / ❌
+              - [ ] No new flaky tests: ✅ / ❌
+              
+              ### 📸 Test Results
+              After running tests, attach:
+              - Final state screenshot
+              - Console logs if any failures
+              - Performance timing data
+              
+              **Auto-created by GitHub Actions** 🤖" \
+              --label "testing,e2e,verification,auto-created"
+          fi
