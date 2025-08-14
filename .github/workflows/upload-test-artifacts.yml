@@ -50,7 +50,7 @@ jobs:
             
             await github.rest.issues.createComment({
               owner: context.repo.owner,
-              repo: context.repo.repo,
+              repo: 'biz-buddy-ally-now',  // Target main app repo for issues
               issue_number: issueNumber,
               body: `## 📸 Test Screenshots Available
               
