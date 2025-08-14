@@ -1,0 +1,17 @@
+{
+  "timestamp": "2025-08-14T07-47-57",
+  "issue": 19,
+  "description": "Dev Toolkit UI improvements - larger viewport and Migration Runner enhancements",
+  "screenshots": [
+    {
+      "filename": "01-migration-runner-improved.png",
+      "path": "/Users/gianmatteo/Documents/Arcana-Prototype-2/biz-buddy-e2e-tests/test-screenshots/ui-improvements/2025-08-14T07-47-57/01-migration-runner-improved.png",
+      "size": 68956
+    },
+    {
+      "filename": "03-dev-toolkit-full-page.png",
+      "path": "/Users/gianmatteo/Documents/Arcana-Prototype-2/biz-buddy-e2e-tests/test-screenshots/ui-improvements/2025-08-14T07-47-57/03-dev-toolkit-full-page.png",
+      "size": 68956
+    }
+  ]
+}

@@ -595,6 +595,64 @@ class BaseUserStoryTest {
     }
   }
 
+  // ==================== GITHUB INTEGRATION ====================
+
+  /**
+   * Upload screenshots to GitHub issue using the operational workflow
+   * This integrates with the proven screenshot system for issue updates
+   */
+  async uploadScreenshotsToIssue(issueNumber, options = {}) {
+    if (!issueNumber) {
+      console.log('⚠️ No issue number provided - skipping screenshot upload');
+      return false;
+    }
+
+    const { exec } = require('child_process');
+    const util = require('util');
+    const execAsync = util.promisify(exec);
+
+    const testName = options.testName || this.config.name || 'E2E Test Results';
+    
+    try {
+      console.log(`\n📸 Uploading screenshots to GitHub issue #${issueNumber}...`);
+      
+      const command = `gh workflow run "Upload Test Screenshots" ` +
+        `--repo gianmatteo-arcana/biz-buddy-e2e-tests ` +
+        `-f issue_number=${issueNumber} ` +
+        `-f test_name="${testName}"`;
+      
+      await execAsync(command);
+      
+      console.log(`✅ Screenshot upload workflow triggered for issue #${issueNumber}`);
+      console.log(`🔗 Check issue at: https://github.com/gianmatteo-arcana/biz-buddy-ally-now/issues/${issueNumber}`);
+      
+      return true;
+    } catch (error) {
+      console.log(`❌ Failed to upload screenshots: ${error.message}`);
+      return false;
+    }
+  }
+
+  /**
+   * Complete E2E test with GitHub issue update
+   * This is the full operational procedure for issue resolution
+   */
+  async completeWithIssueUpdate(issueNumber, options = {}) {
+    const success = await this.run();
+    
+    if (success && issueNumber) {
+      await this.uploadScreenshotsToIssue(issueNumber, options);
+      
+      console.log(`\n🎯 E2E Test Complete with Issue Update:`);
+      console.log(`   • Test: ${this.config.name}`);
+      console.log(`   • Issue: #${issueNumber}`);
+      console.log(`   • Screenshots: Uploaded to GitHub`);
+      console.log(`   • Status: ${success ? '✅ PASSED' : '❌ FAILED'}`);
+    }
+    
+    return success;
+  }
+
   // ==================== HELPER METHODS ====================
 
   logBrowserError(message) {

@@ -112,7 +112,7 @@ jobs:
               process.exit(1);
             }
           
-      - name: Post issue comment with embedded screenshots
+      - name: Post issue comment with base64 embedded screenshots
         uses: actions/github-script@v7
         with:
           script: |
@@ -124,19 +124,34 @@ jobs:
             const owner = context.repo.owner;
             const repo = 'biz-buddy-ally-now';  // Target main app repo
             
-            // Get list of uploaded files and create raw GitHub URLs
+            // Since the repo is private, raw URLs won't work publicly
+            // Use base64 embedding for smaller files, or file links for larger ones
             let screenshotMarkdown = '';
             
             try {
               const files = fs.readdirSync(uploadDir);
-              const imageFiles = files.filter(f => f.endsWith('.png') || f.endsWith('.jpg'));
+              const imageFiles = files.filter(f => f.endsWith('.png') || f.endsWith('.jpg')).slice(0, 3); // Limit to 3 files to avoid size issues
               
               if (imageFiles.length > 0) {
-                screenshotMarkdown = imageFiles.map(file => {
-                  // Use raw.githubusercontent.com URL pointing to the E2E repo where files are stored
-                  const rawUrl = `https://raw.githubusercontent.com/${context.repo.owner}/${context.repo.repo}/main/${uploadDir}/${file}`;
-                  return `![${file}](${rawUrl})`;
-                }).join('\n\n');
+                for (const file of imageFiles) {
+                  const filePath = path.join(uploadDir, file);
+                  const stats = fs.statSync(filePath);
+                  
+                  // Only embed files smaller than 50KB to avoid GitHub comment limits
+                  if (stats.size < 50 * 1024) {
+                    try {
+                      const imageBuffer = fs.readFileSync(filePath);
+                      const base64Image = imageBuffer.toString('base64');
+                      const mimeType = file.endsWith('.png') ? 'image/png' : 'image/jpeg';
+                      const dataUrl = `data:${mimeType};base64,${base64Image}`;
+                      screenshotMarkdown += `**${file}**:\n![${file}](${dataUrl})\n\n`;
+                    } catch (err) {
+                      screenshotMarkdown += `**${file}**: ⚠️ File too large for embedding\n\n`;
+                    }
+                  } else {
+                    screenshotMarkdown += `**${file}**: 📁 File available in repository (${Math.round(stats.size/1024)}KB)\n\n`;
+                  }
+                }
               }
             } catch (error) {
               console.log('Could not read screenshot files:', error.message);
@@ -153,7 +168,7 @@ ${screenshotMarkdown}
 ---
 📁 **Repository Path**: \`${uploadDir}\`  
 🧹 **Auto-cleanup**: Screenshots older than 10 days are automatically removed  
-✅ **Immediate Access**: Screenshots are embedded above for instant viewing`;
+⚠️ **Note**: Repository is private, so raw URLs don't work publicly`;
             
             await github.rest.issues.createComment({
               owner: owner,
