@@ -1,5 +1,20 @@
 # E2E Testing Standards - Claude Code Guidelines
 
+## 🚨 CRITICAL: PULL REQUEST WORKFLOW MANDATORY
+
+### **NO DIRECT PUSHES TO MAIN BRANCH**
+
+**YOU ARE FORBIDDEN FROM:**
+- ❌ `git push origin main`
+- ❌ Merging without human approval
+- ❌ Bypassing PR review process
+
+**YOU MUST ALWAYS:**
+- ✅ Create feature branches for ALL test updates
+- ✅ Push to feature branches only
+- ✅ Create Pull Requests for review
+- ✅ Wait for human approval before merge
+
 ## 🔴 MANDATORY: PLAYWRIGHT TESTING STANDARDS FOR REACT
 
 **CRITICAL: All E2E tests MUST follow the Playwright Testing Standards documented in `PLAYWRIGHT_TESTING_STANDARDS.md`**
@@ -9,6 +24,8 @@
 2. **Explicit over implicit** - App signals when ready, tests don't guess
 3. **Test-specific attributes** - Use `data-testid` for selectors, never CSS classes
 4. **Deterministic waits** - Wait for `data-loaded="true"` not `waitForTimeout()`
+5. **Screenshot validation** - Capture and analyze screenshots for UI verification
+6. **Multi-repo coordination** - E2E tests must work with ALL repo versions
 
 ### Required Test Pattern:
 ```javascript
@@ -37,8 +54,17 @@ See `PLAYWRIGHT_TESTING_STANDARDS.md` for complete implementation guide.
 3. Implement `runUserStory()` method with test logic
 4. Add to `test-suite.js` for suite execution
 5. Run with `node test-[name]-story.js`
+6. **VERIFY** tests pass with both frontend and backend running
+7. **CREATE PR** for review - never push directly to main
 
 **NEVER create standalone E2E tests outside this framework!**
+
+### Test Output Location
+**ALL test results, screenshots, and logs MUST be stored in:**
+```
+/Users/gianmatteo/Documents/Arcana-Prototype/tests/
+```
+**NEVER commit test artifacts to git!**
 
 ## 🎯 MANDATORY: Use Playwright Only
 
@@ -93,6 +119,14 @@ localStorage.setItem('sb-raenkewzlvrdqufwxjpl-auth-token', JSON.stringify({
 **❌ `run-e2e-test.js`** - Legacy Puppeteer implementation
 - Uses localStorage injection (doesn't work)
 - Should be converted to Playwright or removed
+
+## 🔧 ARCHITECTURAL PRINCIPLES FROM PR REVIEWS
+
+### From Backend/Frontend Integration:
+1. **TYPE SYNCHRONIZATION** - Keep frontend and backend types aligned
+2. **NO PREMATURE ABSTRACTION** - Don't create "universal" test patterns too early
+3. **CLEAR ERROR MESSAGES** - Test failures should explain what went wrong
+4. **MULTI-REPO AWARENESS** - Tests must handle schema/API changes gracefully
 
 ## 🏆 Achievement Record: Dev Toolkit Authentication Fix
 
