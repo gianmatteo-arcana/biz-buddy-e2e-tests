@@ -1,0 +1,8 @@
+{
+  "timestamp": "2025-08-14T09:14:41.902Z",
+  "strategy": "Apply migrations one by one",
+  "totalApplied": 15,
+  "finalPendingCount": 5,
+  "zeroPendingAchieved": false,
+  "missionStatus": "❓ 5 still pending"
+}

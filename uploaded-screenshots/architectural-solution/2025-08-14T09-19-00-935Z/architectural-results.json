@@ -1,0 +1,13 @@
+{
+  "timestamp": "2025-08-14T09:19:01.046Z",
+  "strategy": "Apply specific architectural solution migrations",
+  "targetMigrations": [
+    "20250814192000_create_tasks_table_no_auth_trigger",
+    "20250814193000_mark_auth_trigger_migrations_obsolete"
+  ],
+  "migrationsApplied": 0,
+  "finalPendingCount": 5,
+  "zeroPendingAchieved": false,
+  "architecturalSuccess": false,
+  "missionStatus": "❌ No progress made"
+}
