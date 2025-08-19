@@ -10,7 +10,7 @@ import fs from 'fs';
 // Environment configurations
 const ENVIRONMENTS = {
   localhost: {
-    baseUrl: 'http://localhost:8081',
+    baseUrl: process.env.APP_URL || 'http://localhost:8082',
     name: 'localhost',
     authRedirectExpected: true, // Should redirect back to localhost after OAuth
     devToolkitPath: '/dev-toolkit-standalone'

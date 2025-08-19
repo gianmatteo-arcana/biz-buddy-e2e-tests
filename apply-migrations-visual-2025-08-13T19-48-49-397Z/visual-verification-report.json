@@ -1,0 +1,103 @@
+{
+  "testRunId": "apply-migrations-visual-2025-08-13T19-48-49-397Z",
+  "timestamp": "2025-08-13T19:50:11.526Z",
+  "screenshots": [
+    {
+      "filename": "01-dev-toolkit-initial.png",
+      "description": "Dev Toolkit loaded"
+    },
+    {
+      "filename": "02-migrations-tab.png",
+      "description": "Migrations tab opened"
+    },
+    {
+      "filename": "03-migrations-selected.png",
+      "description": "After selection attempt"
+    },
+    {
+      "filename": "04-before-apply.png",
+      "description": "Before clicking Apply"
+    },
+    {
+      "filename": "05-after-apply.png",
+      "description": "After clicking Apply"
+    },
+    {
+      "filename": "06-final-state.png",
+      "description": "Final state after refresh"
+    }
+  ],
+  "visualAnalysis": [
+    {
+      "name": "initial-load",
+      "timestamp": "2025-08-13T19:48:56.253Z",
+      "pendingCount": null,
+      "appliedCount": null,
+      "errorMessages": [],
+      "successMessages": [],
+      "visibleMigrations": [],
+      "applyButtonState": null
+    },
+    {
+      "name": "before-action",
+      "timestamp": "2025-08-13T19:49:58.868Z",
+      "pendingCount": 3,
+      "appliedCount": 59,
+      "errorMessages": [],
+      "successMessages": [],
+      "visibleMigrations": [
+        "20250813190500_mark_as_applied.sql",
+        "20250813010809_demo_comment_update.sql",
+        "20250813_000000_initial_schema.sql"
+      ],
+      "applyButtonState": {
+        "visible": true,
+        "enabled": true,
+        "text": "Apply Selected (3)"
+      }
+    },
+    {
+      "name": "after-apply",
+      "timestamp": "2025-08-13T19:50:06.286Z",
+      "pendingCount": 3,
+      "appliedCount": 59,
+      "errorMessages": [],
+      "successMessages": [],
+      "visibleMigrations": [
+        "20250813190500_mark_as_applied.sql",
+        "20250813010809_demo_comment_update.sql",
+        "20250813_000000_initial_schema.sql"
+      ],
+      "applyButtonState": {
+        "visible": true,
+        "enabled": false,
+        "text": "Applying..."
+      }
+    },
+    {
+      "name": "final-state",
+      "timestamp": "2025-08-13T19:50:11.517Z",
+      "pendingCount": 3,
+      "appliedCount": 59,
+      "errorMessages": [],
+      "successMessages": [],
+      "visibleMigrations": [
+        "20250813190500_mark_as_applied.sql",
+        "20250813010809_demo_comment_update.sql",
+        "20250813_000000_initial_schema.sql"
+      ],
+      "applyButtonState": {
+        "visible": true,
+        "enabled": true,
+        "text": "Apply Selected (3)"
+      }
+    }
+  ],
+  "summary": {
+    "initialPendingCount": 3,
+    "finalPendingCount": 3,
+    "migrationsApplied": 0,
+    "success": false,
+    "errors": []
+  }
+}

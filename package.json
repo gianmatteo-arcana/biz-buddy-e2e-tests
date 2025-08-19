@@ -62,8 +62,10 @@
   },
   "dependencies": {
     "@octokit/rest": "^22.0.0",
-    "@supabase/supabase-js": "^2.54.0",
+    "@supabase/supabase-js": "^2.55.0",
+    "axios": "^1.11.0",
     "node-fetch": "^3.3.2",
-    "puppeteer": "^24.16.0"
+    "puppeteer": "^24.16.0",
+    "uuid": "^11.1.0"
   }
 }
